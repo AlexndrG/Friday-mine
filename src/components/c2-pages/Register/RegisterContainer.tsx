@@ -1,11 +1,12 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import {Register} from './Register';
 import {useDispatch, useSelector} from 'react-redux';
-import {registerTC, setErrorAC, setIsRegisteredAC} from '../../../bll/registerReducer';
+import {registerTC, setRegisterErrorAC, setIsRegisteredAC} from '../../../bll/registerReducer';
 import {AppRootStateType} from '../../../bll/store';
 import {Redirect} from 'react-router-dom';
 
 export function RegisterContainer() {
+    const isBusy = useSelector<AppRootStateType, boolean>(state => state.register.isBusy)
     const isRegistered = useSelector<AppRootStateType, boolean>(state => state.register.isRegistered)
     const error = useSelector<AppRootStateType, string>(state => state.register.error)
     const dispatch = useDispatch()
@@ -13,6 +14,7 @@ export function RegisterContainer() {
     useEffect(() => {
         return () => {
             dispatch(setIsRegisteredAC(false))
+            dispatch(setRegisterErrorAC(''))
         }
     }, [])
 
@@ -24,28 +26,28 @@ export function RegisterContainer() {
     const [password2, setPassword2] = useState<string>('11111111')
 
     const emailChange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (error) dispatch(setErrorAC(''))
+        if (error) dispatch(setRegisterErrorAC(''))
         setEmail(e.currentTarget.value)
     }
 
     const passwordChange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (error) dispatch(setErrorAC(''))
+        if (error) dispatch(setRegisterErrorAC(''))
         setPassword(e.currentTarget.value)
     }
 
     const password2Change = (e: ChangeEvent<HTMLInputElement>) => {
-        if (error) dispatch(setErrorAC(''))
+        if (error) dispatch(setRegisterErrorAC(''))
         setPassword2(e.currentTarget.value)
     }
 
     const registerPress = () => {
         if (email === '' && password === '' && password2 === '') {
-            dispatch(setErrorAC('Fill all fields!'))
+            dispatch(setRegisterErrorAC('Fill all fields!'))
             return
         }
 
         if (password !== password2) {
-            dispatch(setErrorAC('Passwords do not match!'))
+            dispatch(setRegisterErrorAC('Passwords do not match!'))
             return
         }
 
@@ -59,6 +61,7 @@ export function RegisterContainer() {
 
     return (
         <Register
+            isBusy={isBusy}
             email={email}
             password={password}
             password2={password2}
