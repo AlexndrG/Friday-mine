@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/Friday-mine/static/css/main.0d84f06e.chunk.css",
+    "main.js": "/Friday-mine/static/js/main.c1aab5a1.chunk.js",
+    "main.js.map": "/Friday-mine/static/js/main.c1aab5a1.chunk.js.map",
+    "runtime-main.js": "/Friday-mine/static/js/runtime-main.5ec9739c.js",
+    "runtime-main.js.map": "/Friday-mine/static/js/runtime-main.5ec9739c.js.map",
+    "static/js/2.ecf8e247.chunk.js": "/Friday-mine/static/js/2.ecf8e247.chunk.js",
+    "static/js/2.ecf8e247.chunk.js.map": "/Friday-mine/static/js/2.ecf8e247.chunk.js.map",
+    "index.html": "/Friday-mine/index.html",
+    "static/css/main.0d84f06e.chunk.css.map": "/Friday-mine/static/css/main.0d84f06e.chunk.css.map",
+    "static/js/2.ecf8e247.chunk.js.LICENSE.txt": "/Friday-mine/static/js/2.ecf8e247.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5ec9739c.js",
+    "static/js/2.ecf8e247.chunk.js",
+    "static/css/main.0d84f06e.chunk.css",
+    "static/js/main.c1aab5a1.chunk.js"
+  ]
+}
