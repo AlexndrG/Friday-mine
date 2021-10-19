@@ -1,21 +1,22 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../../bll/store';
-import {Redirect} from 'react-router-dom';
+import {LoginResponseType} from '../../../dal/cards-api';
 import {Profile} from './Profile';
-import {LoginResponseType} from '../../../dal/api-login';
-import {logoutTC, setProfileErrorAC} from '../../../bll/profileReducer';
+import {setAppErrorAC} from '../../../bll/appReducer';
+import { Redirect } from 'react-router-dom';
+import {logoutTC} from '../../../bll/profileReducer';
 
 export function ProfileContainer() {
-    const isLogined = useSelector<AppRootStateType, boolean>(state => state.login.isLogined)
-    const isBusy = useSelector<AppRootStateType, boolean>(state => state.profile.isBusy)
-    const error = useSelector<AppRootStateType, string>(state => state.profile.error)
+    const isLogined = useSelector<AppRootStateType, boolean>(state => state.app.isLogined)
+    const isBusy = useSelector<AppRootStateType, boolean>(state => state.app.isBusy)
+    const error = useSelector<AppRootStateType, string>(state => state.app.error)
     const userData = useSelector<AppRootStateType, LoginResponseType>(state => state.app.userData)
     const dispatch = useDispatch()
 
     useEffect(() => {
         return () => {
-            dispatch(setProfileErrorAC(''))
+            dispatch(setAppErrorAC(''))
         }
     }, [])
 

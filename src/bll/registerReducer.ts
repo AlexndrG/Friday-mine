@@ -1,31 +1,19 @@
-import {Dispatch} from 'redux'
-import {registerAPI} from '../dal/api-register';
+import { Dispatch } from "redux"
+import {setAppBusyAC, setAppErrorAC} from './appReducer';
+import {authAPI} from '../dal/cards-api';
 
 const initialState = {
-    isBusy: false,
     isRegistered: false,
-    error: '',
 }
 type StateType = typeof initialState
 
+
 export function registerReducer(state: StateType = initialState, action: ActionType): StateType {
     switch (action.type) {
-        case 'REGISTER/SET-IS-BUSY':
+        case 'REGISTER/SET-REGISTER':
             return {
                 ...state,
-                isBusy: action.isBusy,
-            }
-
-        case 'REGISTER/SET-IS-REGISTERED':
-            return {
-                ...state,
-                isRegistered: action.isRegistered,
-            }
-
-        case 'REGISTER/SET-ERROR':
-            return {
-                ...state,
-                error: action.errorText,
+                isRegistered: action.value,
             }
 
         default:
@@ -33,31 +21,22 @@ export function registerReducer(state: StateType = initialState, action: ActionT
     }
 }
 
-export const setRegisterIsBusyAC = (isBusy: boolean) => ({type: 'REGISTER/SET-IS-BUSY', isBusy} as const)
-export const setIsRegisteredAC = (isRegistered: boolean) => ({type: 'REGISTER/SET-IS-REGISTERED', isRegistered} as const)
-export const setRegisterErrorAC = (errorText: string) => ({type: 'REGISTER/SET-ERROR', errorText} as const)
-
+export const setRegisteredAC = (value: boolean) => ({type: 'REGISTER/SET-REGISTER', value} as const)
 
 export const registerTC = (email: string, password: string) => (dispatch: Dispatch) => {
-    dispatch(setRegisterErrorAC(''))
-    dispatch(setRegisterIsBusyAC(true))
-    registerAPI.register(email, password)
-        .then(res => {
-            // console.log('res: ',res.data)
-            // console.dir(res)
-            dispatch(setIsRegisteredAC(true))
+    dispatch(setAppErrorAC(''))
+    dispatch(setAppBusyAC(true))
+    authAPI.register(email, password)
+        .then(response => {
+            dispatch(setRegisteredAC(true))
         })
-        .catch(err => {
-            // console.log('err: ',err.response.data)
-            // console.dir(err)
-            dispatch(setRegisterErrorAC(err.response.data.error))
+        .catch(error => {
+            dispatch(setAppErrorAC(error.response ? error.response.data.error : error.message))
         })
         .finally(() => {
-            dispatch(setRegisterIsBusyAC(false))
+            dispatch(setAppBusyAC(false))
         })
 }
 
 type ActionType =
-    | ReturnType<typeof setRegisterIsBusyAC>
-    | ReturnType<typeof setIsRegisteredAC>
-    | ReturnType<typeof setRegisterErrorAC>
+    | ReturnType<typeof setRegisteredAC>

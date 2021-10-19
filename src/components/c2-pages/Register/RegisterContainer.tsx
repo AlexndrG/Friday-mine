@@ -1,20 +1,21 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
-import {Register} from './Register';
 import {useDispatch, useSelector} from 'react-redux';
-import {registerTC, setRegisterErrorAC, setIsRegisteredAC} from '../../../bll/registerReducer';
 import {AppRootStateType} from '../../../bll/store';
-import {Redirect} from 'react-router-dom';
+import {setAppErrorAC} from '../../../bll/appReducer';
+import { Redirect } from 'react-router-dom';
+import { Register } from './Register';
+import {registerTC, setRegisteredAC} from '../../../bll/registerReducer';
 
 export function RegisterContainer() {
-    const isBusy = useSelector<AppRootStateType, boolean>(state => state.register.isBusy)
+    const isBusy = useSelector<AppRootStateType, boolean>(state => state.app.isBusy)
     const isRegistered = useSelector<AppRootStateType, boolean>(state => state.register.isRegistered)
-    const error = useSelector<AppRootStateType, string>(state => state.register.error)
+    const error = useSelector<AppRootStateType, string>(state => state.app.error)
     const dispatch = useDispatch()
 
     useEffect(() => {
         return () => {
-            dispatch(setIsRegisteredAC(false))
-            dispatch(setRegisterErrorAC(''))
+            dispatch(setRegisteredAC(false))
+            dispatch(setAppErrorAC(''))
         }
     }, [])
 
@@ -26,28 +27,28 @@ export function RegisterContainer() {
     const [password2, setPassword2] = useState<string>('11111111')
 
     const emailChange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (error) dispatch(setRegisterErrorAC(''))
+        if (error) dispatch(setAppErrorAC(''))
         setEmail(e.currentTarget.value)
     }
 
     const passwordChange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (error) dispatch(setRegisterErrorAC(''))
+        if (error) dispatch(setAppErrorAC(''))
         setPassword(e.currentTarget.value)
     }
 
     const password2Change = (e: ChangeEvent<HTMLInputElement>) => {
-        if (error) dispatch(setRegisterErrorAC(''))
+        if (error) dispatch(setAppErrorAC(''))
         setPassword2(e.currentTarget.value)
     }
 
     const registerPress = () => {
-        if (email === '' && password === '' && password2 === '') {
-            dispatch(setRegisterErrorAC('Fill all fields!'))
+        if (email === '' || password === '' || password2 === '') {
+            dispatch(setAppErrorAC('Fill all fields!'))
             return
         }
 
         if (password !== password2) {
-            dispatch(setRegisterErrorAC('Passwords do not match!'))
+            dispatch(setAppErrorAC('Passwords do not match!'))
             return
         }
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import s from './Profile.module.css'
 import avatar from './avatar.jpg'
-import {LoginResponseType} from '../../../dal/api-login';
+import {LoginResponseType} from '../../../dal/cards-api';
 import SuperButton from '../../c1-common/c2-SuperButton/SuperButton';
-import {Loader} from '../../Loader/Loader';
+import { Loader } from '../../Loader/Loader';
 
 type PropsType = {
     isBusy: boolean
@@ -26,12 +26,17 @@ export function Profile(props: PropsType) {
                 </div>
 
                 <div className={s.item}>
-                    {props.userData.name}
+                    <b>Name:</b>{` ${props.userData.name}`}
                 </div>
 
                 <div className={s.item}>
-                    {props.userData.email}
+                    <b>Email:</b>{` ${props.userData.email}`}
                 </div>
+
+                <div className={s.item}>
+                    <b>Avatar link:</b>{` ${props.userData.avatar}`}
+                </div>
+
 
                 <div className={s.item}>
                     <br/>

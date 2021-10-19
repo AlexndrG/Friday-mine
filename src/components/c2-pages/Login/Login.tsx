@@ -1,8 +1,8 @@
 import React, {ChangeEvent, MouseEvent} from 'react';
-import s from './Login.module.css'
 import SuperInputText from '../../c1-common/c1-SuperInputText/SuperInputText';
 import SuperButton from '../../c1-common/c2-SuperButton/SuperButton';
-import {Loader} from '../../Loader/Loader';
+import { Loader } from '../../Loader/Loader';
+import s from './Login.module.css'
 
 type PropsType = {
     isBusy: boolean
