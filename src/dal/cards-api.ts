@@ -11,7 +11,6 @@ const instance = axios.create({
 })
 
 
-
 export const authAPI = {
     me() {
         return instance.post<LoginResponseType>('auth/me', {});
@@ -28,9 +27,17 @@ export const authAPI = {
     register(email: string, password: string) {
         return instance.post<RegisterResponseType>('auth/register', {email, password});
     },
+
+    editProfile(name: string, avatar: string) {
+        return instance.put<EditProfileResponseType>('auth/me', {name, avatar});
+    },
+
 }
 
-
+export type EditProfileResponseType = {
+    updatedUser: LoginResponseType
+    error?: string
+}
 
 
 export type LoginResponseType = {

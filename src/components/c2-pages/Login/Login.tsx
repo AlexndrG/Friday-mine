@@ -1,7 +1,7 @@
 import React, {ChangeEvent, MouseEvent} from 'react';
 import SuperInputText from '../../c1-common/c1-SuperInputText/SuperInputText';
 import SuperButton from '../../c1-common/c2-SuperButton/SuperButton';
-import { Loader } from '../../Loader/Loader';
+import {Loader} from '../../Loader/Loader';
 import s from './Login.module.css'
 
 type PropsType = {
@@ -56,7 +56,7 @@ export function Login(props: PropsType) {
                 <div className={s.item}>
                     <br/>
                     <SuperButton
-                        onClick={()=>props.loginPress(false)}
+                        onClick={() => props.loginPress(false)}
                         disabled={props.isBusy}
                     >
                         Login
@@ -95,7 +95,7 @@ export function Login(props: PropsType) {
                 <div className={s.item}>
                     <br/>
                     <SuperButton
-                        onClick={()=>props.loginPress(true)}
+                        onClick={() => props.loginPress(true)}
                         disabled={props.isBusy}
                         red
                     >

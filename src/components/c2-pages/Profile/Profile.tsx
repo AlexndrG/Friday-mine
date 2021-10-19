@@ -1,15 +1,24 @@
 import React from 'react';
 import s from './Profile.module.css'
-import avatar from './avatar.jpg'
-import {LoginResponseType} from '../../../dal/cards-api';
+import avatarDefault from './avatar.jpg'
 import SuperButton from '../../c1-common/c2-SuperButton/SuperButton';
 import {Loader} from '../../Loader/Loader';
+import SuperEditableSpan from '../../c1-common/c4-SuperEditableSpan/SuperEditableSpan';
+
 
 type PropsType = {
     isBusy: boolean
     error: string
-    userData: LoginResponseType
+    email: string
+    avatar: string
+    newName: string
+    newAvatar: string
+
+    nameChange: (value: string) => void
+    avatarChange: (value: string) => void
+    changePress: () => void
     logoutPress: () => void
+
     ifImgError: string
     setIfImgError: (avatar: string) => void
 }
@@ -23,23 +32,50 @@ export function Profile(props: PropsType) {
                 <div className={s.item}>
                     <img
                         className={s.photo}
-                        src={props.ifImgError || props.userData.avatar || avatar}
-                        onError={() => props.setIfImgError(avatar)}
+                        // src={props.avatar || avatarDefault}
+                        src={props.ifImgError || props.avatar || avatarDefault}
+                        onError={() => props.setIfImgError(avatarDefault)}
                     />
                 </div>
 
                 <div className={s.item}>
-                    <b>Name:</b>{` ${props.userData.name}`}
+                    <b>Email:</b>{` ${props.email}`}
                 </div>
 
                 <div className={s.item}>
-                    <b>Email:</b>{` ${props.userData.email}`}
+                    <b>Name:</b>
+                    <div>
+                        <SuperEditableSpan
+                            value={props.newName}
+                            onChangeText={props.nameChange}
+                            disabled={props.isBusy}
+                            size={50}
+                        />
+                    </div>
                 </div>
 
                 <div className={s.item}>
-                    <b>Avatar link:</b>{` ${props.userData.avatar}`}
+                    <b>Avatar link:</b>
+                    <div>
+                        <SuperEditableSpan
+                            value={props.newAvatar}
+                            onChangeText={props.avatarChange}
+                            disabled={props.isBusy}
+                            size={75}
+                        />
+                    </div>
                 </div>
 
+
+                <div className={s.item}>
+                    <br/>
+                    <SuperButton
+                        onClick={props.changePress}
+                        disabled={props.isBusy}
+                    >
+                        Change profile
+                    </SuperButton>
+                </div>
 
                 <div className={s.item}>
                     <br/>
@@ -51,6 +87,7 @@ export function Profile(props: PropsType) {
                     </SuperButton>
                 </div>
             </div>
+
 
             {props.isBusy &&
             <div>
