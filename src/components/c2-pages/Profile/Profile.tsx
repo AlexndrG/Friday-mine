@@ -14,13 +14,15 @@ type PropsType = {
     newName: string
     newAvatar: string
 
-    nameChange: (value: string) => void
-    avatarChange: (value: string) => void
+    nameChangeText: (value: string) => void
+    avatarChangeText: (value: string) => void
     changePress: () => void
     logoutPress: () => void
 
     ifImgError: string
     setIfImgError: (avatar: string) => void
+
+    profileChanged: boolean
 }
 
 export function Profile(props: PropsType) {
@@ -32,7 +34,6 @@ export function Profile(props: PropsType) {
                 <div className={s.item}>
                     <img
                         className={s.photo}
-                        // src={props.avatar || avatarDefault}
                         src={props.ifImgError || props.avatar || avatarDefault}
                         onError={() => props.setIfImgError(avatarDefault)}
                     />
@@ -47,7 +48,7 @@ export function Profile(props: PropsType) {
                     <div>
                         <SuperEditableSpan
                             value={props.newName}
-                            onChangeText={props.nameChange}
+                            onChangeText={props.nameChangeText}
                             disabled={props.isBusy}
                             size={50}
                         />
@@ -59,7 +60,7 @@ export function Profile(props: PropsType) {
                     <div>
                         <SuperEditableSpan
                             value={props.newAvatar}
-                            onChangeText={props.avatarChange}
+                            onChangeText={props.avatarChangeText}
                             disabled={props.isBusy}
                             size={75}
                         />
@@ -71,7 +72,7 @@ export function Profile(props: PropsType) {
                     <br/>
                     <SuperButton
                         onClick={props.changePress}
-                        disabled={props.isBusy}
+                        disabled={!props.profileChanged || props.isBusy}
                     >
                         Change profile
                     </SuperButton>

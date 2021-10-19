@@ -20,6 +20,9 @@ export function ProfileContainer() {
 
     const [ifImgError, setIfImgError] = useState('')
 
+    const [profileChanged, setProfileChanged] = useState(false)
+
+
     useEffect(() => {
         return () => {
             dispatch(setAppErrorAC(''))
@@ -27,15 +30,23 @@ export function ProfileContainer() {
     }, [])
 
     useEffect(() => {
-        return () => {
-            setIfImgError(avatar => '')
-        }
+        setIfImgError(avatar => '')
     }, [avatar])
 
+    const nameChangeText = (value: string) => {
+        setProfileChanged(true)
+        setNewName(value)
+    }
+
+    const avatarChangeText = (value: string) => {
+        setProfileChanged(true)
+        setNewAvatar(value)
+    }
 
 
     const changePress = () => {
         dispatch(changeProfileTC(newName, newAvatar))
+        setProfileChanged(false)
     }
 
     const logoutPress = () => {
@@ -55,13 +66,15 @@ export function ProfileContainer() {
             newName={newName}
             avatar={avatar || 'none'}
             newAvatar={newAvatar}
-            nameChange={setNewName}
-            avatarChange={setNewAvatar}
+            nameChangeText={nameChangeText}
+            avatarChangeText={avatarChangeText}
 
             changePress={changePress}
             logoutPress={logoutPress}
             ifImgError={ifImgError}
             setIfImgError={setIfImgError}
+
+            profileChanged={profileChanged}
         />
     )
 }
