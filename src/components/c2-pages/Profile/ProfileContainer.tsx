@@ -26,6 +26,13 @@ export function ProfileContainer() {
         }
     }, [])
 
+    useEffect(() => {
+        return () => {
+            setIfImgError(avatar => '')
+        }
+    }, [avatar])
+
+
 
     const changePress = () => {
         dispatch(changeProfileTC(newName, newAvatar))
