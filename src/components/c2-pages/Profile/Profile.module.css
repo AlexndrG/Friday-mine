@@ -9,7 +9,10 @@
 }
 
 .photo {
+    border: 1px solid green;
+    min-width: 100px;
     max-width: 200px;
+    min-height: 100px;
     max-height: 200px;
     margin: 10px 0;
 }

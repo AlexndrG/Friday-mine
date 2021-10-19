@@ -1,8 +1,8 @@
 import React, {ChangeEvent, MouseEvent, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import {AppRootStateType} from '../../../bll/store';
-import { Login } from './Login';
+import {Login} from './Login';
 import {setAppErrorAC} from '../../../bll/appReducer';
 import {loginTC} from '../../../bll/loginReducer';
 
@@ -37,13 +37,19 @@ export function LoginContainer() {
         setRememberMe(e.currentTarget.checked)
     }
 
-    const loginPress = () => {
+    const loginPress = (modeIgnat: boolean) => {
         if (email === '' || password === '') {
             dispatch(setAppErrorAC('Fill email/password fields!'))
             return
         }
 
-        dispatch(loginTC(email, password, rememberMe))
+        if (modeIgnat) {
+            dispatch(loginTC('nya-admin@nya.nya','1qazxcvBG',false))
+        } else
+        {
+            dispatch(loginTC(email, password, rememberMe))
+        }
+
     }
 
 
@@ -52,16 +58,18 @@ export function LoginContainer() {
     }
 
     return (
-        <Login
-            isBusy={isBusy}
-            email={email}
-            password={password}
-            rememberMe={rememberMe}
-            emailChange={emailChange}
-            passwordChange={passwordChange}
-            rememberMeChange={rememberMeChange}
-            loginPress={loginPress}
-            error={error}
-        />
+        <>
+            <Login
+                isBusy={isBusy}
+                email={email}
+                password={password}
+                rememberMe={rememberMe}
+                emailChange={emailChange}
+                passwordChange={passwordChange}
+                rememberMeChange={rememberMeChange}
+                loginPress={loginPress}
+                error={error}
+            />
+        </>
     )
 }

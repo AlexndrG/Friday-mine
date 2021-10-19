@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../../bll/store';
 import {LoginResponseType} from '../../../dal/cards-api';
@@ -14,6 +14,8 @@ export function ProfileContainer() {
     const userData = useSelector<AppRootStateType, LoginResponseType>(state => state.app.userData)
     const dispatch = useDispatch()
 
+    const [ifImgError, setIfImgError] = useState('')
+
     useEffect(() => {
         return () => {
             dispatch(setAppErrorAC(''))
@@ -23,7 +25,6 @@ export function ProfileContainer() {
     const logoutPress = () => {
         dispatch(logoutTC())
     }
-
 
     if (!isLogined) {
         return <Redirect to={'/login'}/>
@@ -35,6 +36,8 @@ export function ProfileContainer() {
             error={error}
             userData={userData}
             logoutPress={logoutPress}
+            ifImgError={ifImgError}
+            setIfImgError={setIfImgError}
         />
     )
 }

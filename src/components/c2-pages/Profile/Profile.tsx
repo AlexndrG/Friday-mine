@@ -3,13 +3,15 @@ import s from './Profile.module.css'
 import avatar from './avatar.jpg'
 import {LoginResponseType} from '../../../dal/cards-api';
 import SuperButton from '../../c1-common/c2-SuperButton/SuperButton';
-import { Loader } from '../../Loader/Loader';
+import {Loader} from '../../Loader/Loader';
 
 type PropsType = {
     isBusy: boolean
     error: string
     userData: LoginResponseType
     logoutPress: () => void
+    ifImgError: string
+    setIfImgError: (avatar: string) => void
 }
 
 export function Profile(props: PropsType) {
@@ -21,7 +23,8 @@ export function Profile(props: PropsType) {
                 <div className={s.item}>
                     <img
                         className={s.photo}
-                        src={props.userData.avatar ? props.userData.avatar : avatar}
+                        src={props.ifImgError || props.userData.avatar || avatar}
+                        onError={() => props.setIfImgError(avatar)}
                     />
                 </div>
 

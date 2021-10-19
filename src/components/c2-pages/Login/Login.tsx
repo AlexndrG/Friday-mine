@@ -13,7 +13,7 @@ type PropsType = {
     emailChange: (e: ChangeEvent<HTMLInputElement>) => void
     passwordChange: (e: ChangeEvent<HTMLInputElement>) => void
     rememberMeChange: (e: MouseEvent<HTMLInputElement>) => void
-    loginPress: () => void
+    loginPress: (mode: boolean) => void
 }
 
 export function Login(props: PropsType) {
@@ -43,7 +43,6 @@ export function Login(props: PropsType) {
                 </div>
 
                 <div className={s.item}>
-
                     <br/>
                     <SuperInputText
                         type={'checkbox'}
@@ -57,13 +56,55 @@ export function Login(props: PropsType) {
                 <div className={s.item}>
                     <br/>
                     <SuperButton
-                        onClick={props.loginPress}
+                        onClick={()=>props.loginPress(false)}
                         disabled={props.isBusy}
                     >
                         Login
                     </SuperButton>
                 </div>
             </div>
+
+            {/*======================================================*/}
+
+            <div className={s.form}>
+                <div className={s.item}>
+                    E-mail
+                    <br/>
+                    <SuperInputText
+                        value={'nya-admin@nya.nya'}
+                    />
+                </div>
+
+                <div className={s.item}>
+                    Password
+                    <br/>
+                    <SuperInputText
+                        value={'1qazxcvBG'}
+                    />
+                </div>
+
+                <div className={s.item}>
+                    <br/>
+                    <SuperInputText
+                        type={'checkbox'}
+                        checked={false}
+                    />
+                    Remember me
+                </div>
+
+                <div className={s.item}>
+                    <br/>
+                    <SuperButton
+                        onClick={()=>props.loginPress(true)}
+                        disabled={props.isBusy}
+                        red
+                    >
+                        Login as Ignat
+                    </SuperButton>
+                </div>
+            </div>
+
+            {/*======================================================*/}
 
             {props.isBusy &&
             <div>
