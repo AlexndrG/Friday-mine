@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Friday-mine/static/css/main.4e992ed9.chunk.css",
-    "main.js": "/Friday-mine/static/js/main.05955f52.chunk.js",
-    "main.js.map": "/Friday-mine/static/js/main.05955f52.chunk.js.map",
+    "main.js": "/Friday-mine/static/js/main.f70c1dc8.chunk.js",
+    "main.js.map": "/Friday-mine/static/js/main.f70c1dc8.chunk.js.map",
     "runtime-main.js": "/Friday-mine/static/js/runtime-main.5ec9739c.js",
     "runtime-main.js.map": "/Friday-mine/static/js/runtime-main.5ec9739c.js.map",
     "static/js/2.5213fd68.chunk.js": "/Friday-mine/static/js/2.5213fd68.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.5ec9739c.js",
     "static/js/2.5213fd68.chunk.js",
     "static/css/main.4e992ed9.chunk.css",
-    "static/js/main.05955f52.chunk.js"
+    "static/js/main.f70c1dc8.chunk.js"
   ]
 }
