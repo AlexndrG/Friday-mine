@@ -32,7 +32,7 @@ export function App() {
         <div>
             <Header isLogined={isLogined} isRestoring={isRestoring}/>
             <Routes/>
-            <Redirect to={isLogined ? '/profile' : '/login'}/>
+            {/*<Redirect to={isLogined ? '/profile' : '/login'}/>*/}
         </div>
     )
 }
