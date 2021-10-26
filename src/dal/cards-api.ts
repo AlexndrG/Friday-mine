@@ -32,7 +32,30 @@ export const authAPI = {
         return instance.put<EditProfileResponseType>('auth/me', {name, avatar});
     },
 
+    pwdRestore(email: string) {
+        return instance.post<PwdRestoreResponseType>('auth/forgot', {email, from, message});
+    },
+
+    pwdNew(password: string, resetPasswordToken: string) {
+        return instance.post<PwdNewResponseType>('auth/set-new-password', {password, resetPasswordToken});
+    },
 }
+
+
+export type PwdNewResponseType = {
+    info: string
+    error: string
+}
+
+
+export type PwdRestoreResponseType = {
+    info: string
+    error: string
+}
+
+const from = 'test-front-admin <ai73a@yandex.by>'
+const message = `<div>Password recovery link: <a href='https://alexndrg.github.io/Friday-mine/#/pwd-new/$token$'>Password recovery link</a></div>`
+
 
 export type EditProfileResponseType = {
     updatedUser: LoginResponseType

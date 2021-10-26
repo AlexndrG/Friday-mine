@@ -13,7 +13,8 @@ type PropsType = {
     emailChange: (e: ChangeEvent<HTMLInputElement>) => void
     passwordChange: (e: ChangeEvent<HTMLInputElement>) => void
     rememberMeChange: (e: MouseEvent<HTMLInputElement>) => void
-    loginPress: (mode: boolean) => void
+    loginPress: () => void
+    loginAsIgnatPress: () => void
 }
 
 export function Login(props: PropsType) {
@@ -56,7 +57,7 @@ export function Login(props: PropsType) {
                 <div className={s.item}>
                     <br/>
                     <SuperButton
-                        onClick={() => props.loginPress(false)}
+                        onClick={props.loginPress}
                         disabled={props.isBusy}
                     >
                         Login
@@ -95,7 +96,7 @@ export function Login(props: PropsType) {
                 <div className={s.item}>
                     <br/>
                     <SuperButton
-                        onClick={() => props.loginPress(true)}
+                        onClick={props.loginAsIgnatPress}
                         disabled={props.isBusy}
                         red
                     >

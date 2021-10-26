@@ -12,6 +12,7 @@ import {Redirect} from 'react-router-dom';
 export function App() {
     const isInitialized = useSelector<AppRootStateType, boolean>(state => state.app.isInitialized)
     const isLogined = useSelector<AppRootStateType, boolean>(state => state.app.isLogined)
+    const isRestoring = useSelector<AppRootStateType, boolean>(state => state.passwordRestore.isRestoring)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -29,7 +30,7 @@ export function App() {
 
     return (
         <div>
-            <Header/>
+            <Header isLogined={isLogined} isRestoring={isRestoring}/>
             <Routes/>
             <Redirect to={isLogined ? '/profile' : '/login'}/>
         </div>

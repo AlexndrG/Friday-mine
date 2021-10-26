@@ -20,7 +20,7 @@ type PropsType = {
     logoutPress: () => void
 
     ifImgError: string
-    setIfImgError: (avatar: string) => void
+    setIfImgErrorHandler: () => void
 
     profileChanged: boolean
 }
@@ -35,7 +35,7 @@ export function Profile(props: PropsType) {
                     <img
                         className={s.photo}
                         src={props.ifImgError || props.avatar || avatarDefault}
-                        onError={() => props.setIfImgError(avatarDefault)}
+                        onError={props.setIfImgErrorHandler}
                     />
                 </div>
 

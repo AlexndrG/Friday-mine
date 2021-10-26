@@ -22,7 +22,9 @@ export function RegisterContainer() {
     // const [email, setEmail] = useState<string>('')
     // const [password1, setPassword1] = useState<string>('')
     // const [password2, setPassword2] = useState<string>('')
-    const [email, setEmail] = useState<string>('dfkcnsldkfj@sdfsifd.ru')
+    // const [email, setEmail] = useState<string>('dfkcnsldkfj@sdfsifd.ru')
+    // const [email, setEmail] = useState<string>('dfkcnsldkfj@yandex.ru')
+    const [email, setEmail] = useState<string>('dfkcnsldkfj@mail.ru')
     const [password, setPassword] = useState<string>('11111111')
     const [password2, setPassword2] = useState<string>('11111111')
 

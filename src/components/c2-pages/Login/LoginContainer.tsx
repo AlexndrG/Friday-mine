@@ -18,7 +18,9 @@ export function LoginContainer() {
         }
     }, [])
 
-    const [email, setEmail] = useState<string>('dfkcnsldkfj@sdfsifd.ru')
+    // const [email, setEmail] = useState<string>('dfkcnsldkfj@sdfsifd.ru')
+    // const [email, setEmail] = useState<string>('dfkcnsldkfj@yandex.ru')
+    const [email, setEmail] = useState<string>('dfkcnsldkfj@mail.ru')
     const [password, setPassword] = useState<string>('11111111')
     const [rememberMe, setRememberMe] = useState<boolean>(false)
 
@@ -37,19 +39,17 @@ export function LoginContainer() {
         setRememberMe(e.currentTarget.checked)
     }
 
-    const loginPress = (modeIgnat: boolean) => {
+    const loginPress = () => {
         if (email === '' || password === '') {
             dispatch(setAppErrorAC('Fill email/password fields!'))
             return
         }
 
-        if (modeIgnat) {
-            dispatch(loginTC('nya-admin@nya.nya','1qazxcvBG',false))
-        } else
-        {
-            dispatch(loginTC(email, password, rememberMe))
-        }
+        dispatch(loginTC(email, password, rememberMe))
+    }
 
+    const loginAsIgnatPress = () => {
+        dispatch(loginTC('nya-admin@nya.nya', '1qazxcvBG', false))
     }
 
 
@@ -68,6 +68,7 @@ export function LoginContainer() {
                 passwordChange={passwordChange}
                 rememberMeChange={rememberMeChange}
                 loginPress={loginPress}
+                loginAsIgnatPress={loginAsIgnatPress}
                 error={error}
             />
         </>

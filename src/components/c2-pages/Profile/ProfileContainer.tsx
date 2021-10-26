@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import avatarDefault from './avatar.jpg'
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../../bll/store';
 import {LoginResponseType} from '../../../dal/cards-api';
@@ -53,6 +54,9 @@ export function ProfileContainer() {
         dispatch(logoutTC())
     }
 
+    const setIfImgErrorHandler = () => {
+        setIfImgError(avatarDefault)
+    }
 
     if (!isLogined) {
         return <Redirect to={'/login'}/>
@@ -72,7 +76,7 @@ export function ProfileContainer() {
             changePress={changePress}
             logoutPress={logoutPress}
             ifImgError={ifImgError}
-            setIfImgError={setIfImgError}
+            setIfImgErrorHandler={setIfImgErrorHandler}
 
             profileChanged={profileChanged}
         />
