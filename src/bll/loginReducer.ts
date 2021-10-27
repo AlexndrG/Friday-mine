@@ -1,5 +1,5 @@
 import {Dispatch} from 'redux';
-import {authAPI} from '../dal/cards-api';
+import {authAPI} from '../dal/auth-api';
 import {setAppBusyAC, setAppErrorAC, setUserDataAC} from './appReducer';
 
 const initialState = {

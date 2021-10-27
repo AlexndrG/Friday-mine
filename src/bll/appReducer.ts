@@ -1,5 +1,5 @@
 import {Dispatch} from 'redux';
-import {authAPI, LoginResponseType} from '../dal/cards-api';
+import {authAPI, LoginResponseType} from '../dal/auth-api';
 
 const initialState = {
     isInitialized: false,

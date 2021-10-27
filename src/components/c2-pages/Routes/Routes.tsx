@@ -6,6 +6,7 @@ import {PwdRestoreContainer} from '../PwdRestore/PwdRestoreContainer';
 import {LoginContainer} from '../Login/LoginContainer';
 import {RegisterContainer} from '../Register/RegisterContainer';
 import {PwdNewContainer} from '../PwdNew/PwdNewContainer';
+import {PacksContainer} from '../Packs/PacksContainer';
 
 /*
 логинизация
@@ -23,7 +24,7 @@ export const PATH = {
     PROFILE: '/profile',
     PASSWORD_RESTORE: '/pwd-restore',
     PASSWORD_NEW: '/pwd-new/:token',
-    TEST: '/test',
+    PACKS: '/packs',
 }
 
 
@@ -38,6 +39,7 @@ export function Routes() {
                 <Route path={PATH.PROFILE} render={() => <ProfileContainer/>}/>
                 <Route path={PATH.PASSWORD_RESTORE} render={() => <PwdRestoreContainer/>}/>
                 <Route path={PATH.PASSWORD_NEW} render={() => <PwdNewContainer/>}/>
+                <Route path={PATH.PACKS} render={() => <PacksContainer/>}/>
 
                 <Route render={() => <Error404/>}/>
             </Switch>

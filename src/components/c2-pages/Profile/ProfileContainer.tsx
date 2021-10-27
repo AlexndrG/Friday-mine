@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import avatarDefault from './avatar.jpg'
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../../bll/store';
-import {LoginResponseType} from '../../../dal/cards-api';
+import {LoginResponseType} from '../../../dal/auth-api';
 import {Profile} from './Profile';
 import {setAppErrorAC} from '../../../bll/appReducer';
 import {Redirect} from 'react-router-dom';

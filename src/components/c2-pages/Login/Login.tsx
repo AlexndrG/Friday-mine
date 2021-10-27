@@ -89,6 +89,7 @@ export function Login(props: PropsType) {
                     <SuperInputText
                         type={'checkbox'}
                         checked={false}
+                        disabled={props.isBusy}
                     />
                     Remember me
                 </div>
