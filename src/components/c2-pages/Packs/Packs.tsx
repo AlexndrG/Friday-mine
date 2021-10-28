@@ -1,10 +1,12 @@
 import React from 'react';
 import s from './Packs.module.css'
-import SuperInputText from '../../c1-common/c1-SuperInputText/SuperInputText';
 import {Loader} from '../../Loader/Loader';
+import {GetPacksResponseType} from '../../../dal/packs-api';
+import {TableLine} from '../TableLine/TableLine';
+import SuperButton from '../../c1-common/c2-SuperButton/SuperButton';
 
 type PropsType = {
-
+    packs: GetPacksResponseType
     isBusy: boolean
     error: string
 }
@@ -15,15 +17,30 @@ export function Packs(props: PropsType) {
             <h1>Packs</h1>
 
             <div className={s.form}>
-                <div className={s.item}>
-                    E-mail
-                    <br/>
-                    <SuperInputText
-                    />
-                </div>
 
+                <TableLine
+                    head={true}
+                    nameField={'Name'}
+                    cardsCountField={'Cards count'}
+                    updatedField={'Updated'}
+                    buttonsField={'Actions'}
+                    // buttonsFieldName={'Actions'}
+                    // buttonsFieldButtons={[<SuperButton>add</SuperButton>]}
+                />
 
+                {
+                    props.packs.cardPacks &&
+                    props.packs.cardPacks.map(c =>
+                        <TableLine
+                            head={false}
+                            nameField={c.name}
+                            cardsCountField={'' + c.cardsCount}
+                            updatedField={c.updated}
+                            buttonsField={'none'}/>
+                    )
+                }
             </div>
+
 
             {props.isBusy &&
             <div>

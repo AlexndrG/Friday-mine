@@ -3,12 +3,16 @@
 
 .form {
     display: inline-block;
+    width: 90%;
+    word-break: break-all;
     border: 1px solid blue;
     padding: 10px;
     margin: 30px;
 }
 
 .item {
+    display: inline-block;
+    box-sizing: border-box;
     margin: 10px 0;
 }
 

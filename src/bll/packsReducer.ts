@@ -21,11 +21,19 @@ type StateType = typeof initialState
 
 export function packsReducer(state: StateType = initialState, action: ActionType): StateType {
     switch (action.type) {
+        case 'PACKS/SET-PACS-DATA':
+            return {
+                ...state,
+                packsData: {...action.packsData}
+            }
 
         default:
             return state
     }
 }
+
+
+export const setPacksDataAC = (packsData: GetPacksResponseType) => ({type: 'PACKS/SET-PACS-DATA', packsData} as const)
 
 
 export const getPacksTC = () => (dispatch: Dispatch, getState: () => AppRootStateType) => {
@@ -35,8 +43,7 @@ export const getPacksTC = () => (dispatch: Dispatch, getState: () => AppRootStat
     const requestData = getState().packs.requestData
     packsAPI.getPacks(requestData)
         .then(response => {
-
-            console.log(response.data)
+            dispatch(setPacksDataAC(response.data))
 
         })
         .catch(error => {
@@ -48,4 +55,5 @@ export const getPacksTC = () => (dispatch: Dispatch, getState: () => AppRootStat
 }
 
 
-type ActionType = any
+type ActionType =
+    | ReturnType<typeof setPacksDataAC>
