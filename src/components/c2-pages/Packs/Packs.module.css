@@ -7,7 +7,7 @@
     word-break: break-all;
     border: 1px solid blue;
     padding: 10px;
-    margin: 30px;
+    margin: 0 20px;
 }
 
 .item {
@@ -18,5 +18,5 @@
 
 .error {
     color: red;
-    margin: 0 0 0 40px;
+    margin: 10px 0 0 20px;
 }

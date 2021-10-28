@@ -1,0 +1,24 @@
+.main {
+}
+
+.form {
+    display: inline-flex;
+    /*border: 1px solid blue;*/
+    /*padding: 5px;*/
+    margin: 10px 0 0 0;
+}
+
+.itemText {
+    padding: 5px 0;
+    margin: 5px 0;
+}
+
+.item {
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid red;
+}
+
+.itemActive {
+    border: 2px solid green;
+}

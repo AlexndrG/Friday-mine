@@ -27,6 +27,15 @@ export function packsReducer(state: StateType = initialState, action: ActionType
                 packsData: {...action.packsData}
             }
 
+        case 'PACKS/SET-PACS-PER-PAGE':
+            return {
+                ...state,
+                requestData: {
+                    ...state.requestData,
+                    pageCount: action.pageCount,
+                }
+            }
+
         default:
             return state
     }
@@ -34,6 +43,7 @@ export function packsReducer(state: StateType = initialState, action: ActionType
 
 
 export const setPacksDataAC = (packsData: GetPacksResponseType) => ({type: 'PACKS/SET-PACS-DATA', packsData} as const)
+export const setPacksPerPageAC = (pageCount: number) => ({type: 'PACKS/SET-PACS-PER-PAGE', pageCount} as const)
 
 
 export const getPacksTC = () => (dispatch: Dispatch, getState: () => AppRootStateType) => {
@@ -54,6 +64,61 @@ export const getPacksTC = () => (dispatch: Dispatch, getState: () => AppRootStat
         })
 }
 
+// export const addPackTC = () => (dispatch: Dispatch) => {
+export const addPackTC = () => (dispatch: any) => {
+    dispatch(setAppErrorAC(''))
+    dispatch(setAppBusyAC(true))
+
+    packsAPI.addPack({name: 'SuperPuperName'})
+        .then(response => {
+            dispatch(getPacksTC())
+
+        })
+        .catch(error => {
+            dispatch(setAppErrorAC(error.response ? error.response.data.error : error.message))
+        })
+        .finally(() => {
+            dispatch(setAppBusyAC(false))
+        })
+}
+
+// export const delPackTC = () => (dispatch: Dispatch) => {
+export const delPackTC = (id: string) => (dispatch: any) => {
+    dispatch(setAppErrorAC(''))
+    dispatch(setAppBusyAC(true))
+
+    packsAPI.delPack(id)
+        .then(response => {
+            dispatch(getPacksTC())
+
+        })
+        .catch(error => {
+            dispatch(setAppErrorAC(error.response ? error.response.data.error : error.message))
+        })
+        .finally(() => {
+            dispatch(setAppBusyAC(false))
+        })
+}
+
+// export const updatePackTC = () => (dispatch: Dispatch) => {
+export const updatePackTC = (_id: string) => (dispatch: any) => {
+    dispatch(setAppErrorAC(''))
+    dispatch(setAppBusyAC(true))
+
+    packsAPI.updatePack({_id, name: 'Updated name!'})
+        .then(response => {
+            dispatch(getPacksTC())
+
+        })
+        .catch(error => {
+            dispatch(setAppErrorAC(error.response ? error.response.data.error : error.message))
+        })
+        .finally(() => {
+            dispatch(setAppBusyAC(false))
+        })
+}
+
 
 type ActionType =
     | ReturnType<typeof setPacksDataAC>
+    | ReturnType<typeof setPacksPerPageAC>

@@ -19,7 +19,7 @@ export function Header({isLogined, isRestoring}: PropsType) {
             {isLogined && <SuperNavLink goTo={PATH.PROFILE} text={'Profile page'}/>}
 
             {!isRestoring &&
-            <SuperNavLink goTo={PATH.PASSWORD_RESTORE} text={'Restore password page'} border={'2px solid blue'}/>}
+            <SuperNavLink goTo={PATH.PASSWORD_RESTORE} text={'Restore password page'} border={'1px solid blue'}/>}
 
             {isLogined && <SuperNavLink goTo={PATH.PACKS} text={'Packs page'}/>}
         </div>

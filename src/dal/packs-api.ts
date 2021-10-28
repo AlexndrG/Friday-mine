@@ -1,11 +1,61 @@
 ﻿import {instance} from './instance';
 
 export const packsAPI = {
-    getPacks(data:PacksRequestType) {
+    getPacks(data: PacksRequestType) {
         return instance.get<GetPacksResponseType>('cards/pack', {params: data})
     },
 
+    addPack(newPack: NewPackType) {
+        return instance.post<AddPackResponseType>('cards/pack', {cardsPack: newPack})
+    },
+
+    delPack(id: string) {
+        return instance.delete<DelPackResponseType>('cards/pack?id=' + id)
+    },
+
+    updatePack(updatePack: UpdatePackType) {
+        return instance.put<UpdatePackResponseType>('cards/pack', {cardsPack: updatePack})
+    },
+
 }
+
+export type UpdatePackResponseType = {
+    updatedCardsPack: PackType
+}
+
+export type UpdatePackType = {
+    _id: string
+    name?: string
+    path?: string
+    grade?: number
+    shots?: number
+    rating?: number
+    deckCover?: string
+    private?: boolean
+    type?: string
+}
+
+
+export type DelPackResponseType = {
+    deletedCardsPack: PackType
+}
+
+
+export type AddPackResponseType = {
+    newCardsPack: PackType
+}
+
+export type NewPackType = {
+    name?: string
+    path?: string
+    grade?: number
+    shots?: number
+    rating?: number
+    deckCover?: string
+    private?: boolean
+    type?: string
+}
+
 
 export type PacksRequestType = {
     packName?: string

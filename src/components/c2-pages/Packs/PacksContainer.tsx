@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {Packs} from './Packs';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../../bll/store';
-import {getPacksTC} from '../../../bll/packsReducer';
+import {addPackTC, delPackTC, getPacksTC, updatePackTC} from '../../../bll/packsReducer';
 import {GetPacksResponseType, PacksRequestType} from '../../../dal/packs-api';
 import {setAppErrorAC} from '../../../bll/appReducer';
 import {Redirect} from 'react-router-dom';
@@ -26,6 +26,17 @@ export function PacksContainer() {
         }
     }, [requestData])
 
+    const addPress = () => {
+        dispatch(addPackTC())
+    }
+
+    const delPress = (id: string) => {
+        dispatch(delPackTC(id))
+    }
+
+    const updatePress = (id: string) => {
+        dispatch(updatePackTC(id))
+    }
 
     if (!isLogined) {
         return <Redirect to={'/login'}/>
@@ -37,6 +48,9 @@ export function PacksContainer() {
                 packs={packsData}
                 isBusy={isBusy}
                 error={error}
+                addPress={addPress}
+                delPress={delPress}
+                updatePress={updatePress}
             />
         </>
     )
