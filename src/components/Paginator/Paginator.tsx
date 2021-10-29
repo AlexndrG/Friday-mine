@@ -39,7 +39,7 @@ export function Paginator() {
         return (
             <div className={s.form}>
                 Page: {currentPage} of {totalPages}
-                <pre> </pre>
+                &nbsp;
                 {
                     pageButtons.map((b,i) =>
                         <SuperButton

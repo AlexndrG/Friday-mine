@@ -7,6 +7,7 @@ import SuperButton from '../../c1-common/c2-SuperButton/SuperButton';
 import {PacksPerPage} from '../../PacksPerPage/PacksPerPage';
 import {MyPacksCheckBox} from '../../MyPacksCheckBox/MyPacksCheckBox';
 import {Paginator} from '../../Paginator/Paginator';
+import {PacksNameSearch} from '../../PacksNameSearch/PacksNameSearch';
 
 type PropsType = {
     userId: string
@@ -24,6 +25,16 @@ export function Packs(props: PropsType) {
             <h1>Packs</h1>
 
             <div className={s.form}>
+
+                <div className={s.headBlocks}>
+                    <div className={s.headBlockLeft}>
+                        <PacksNameSearch/>
+                    </div>
+                    <div className={s.headBlockRight}>
+                        {/*<Paginator/>*/}
+                    </div>
+                </div>
+
 
                 <TableLinePack
                     head={true}
@@ -81,15 +92,19 @@ export function Packs(props: PropsType) {
             </div>
 
 
-            {props.isBusy &&
-            <div>
-                <Loader/>
-            </div>}
+            {
+                props.isBusy &&
+                <div>
+                    <Loader/>
+                </div>
+            }
 
-            {props.error &&
-            <div className={s.error}>
-                {props.error}
-            </div>}
+            {
+                props.error &&
+                <div className={s.error}>
+                    {props.error}
+                </div>
+            }
 
         </div>
     )

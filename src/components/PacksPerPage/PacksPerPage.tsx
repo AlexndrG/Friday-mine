@@ -8,7 +8,7 @@ const perPageArr = [5, 10, 15]
 
 export function PacksPerPage() {
     const isBusy = useSelector<AppRootStateType, boolean>(state => state.app.isBusy)
-    const pageCount = useSelector<AppRootStateType, number | undefined>(state => state.packs.requestData.pageCount) || perPageArr[1]
+    const pageCount = useSelector<AppRootStateType, number | undefined>(state => state.packs.requestPacksData.pageCount) || perPageArr[1]
     const dispatch = useDispatch()
 
     return (

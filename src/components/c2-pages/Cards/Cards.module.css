@@ -16,24 +16,6 @@
     margin: 10px 0;
 }
 
-.headBlocks {
-    display: flex;
-    justify-content: space-between;
-    /*border: 1px dashed red;*/
-}
-
-.headBlockLeft {
-    display: flex;
-    /*border: 1px dotted green;*/
-    /*margin: 5px;*/
-}
-
-.headBlockRight {
-    display: flex;
-    /*border: 1px dotted blue;*/
-    /*margin: 5px;*/
-}
-
 .footBlocks {
     display: flex;
     justify-content: space-between;

@@ -9,7 +9,7 @@ import {setMyPacksCheckBoxAC} from '../../bll/packsReducer';
 export function MyPacksCheckBox() {
     const isBusy = useSelector<AppRootStateType, boolean>(state => state.app.isBusy)
     const id = useSelector<AppRootStateType, string>(state => state.app.userData._id)
-    const requestUserId = useSelector<AppRootStateType, string | undefined>(state => state.packs.requestData.user_id) || ''
+    const requestUserId = useSelector<AppRootStateType, string | undefined>(state => state.packs.requestPacksData.user_id) || ''
     const dispatch = useDispatch()
 
     return (

@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {Packs} from './Packs';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../../bll/store';
-import {addPackTC, delPackTC, getPacksTC, updatePackTC} from '../../../bll/packsReducer';
+import {addPackTC, delPackTC, getPacksTC, setPacksDataAC, updatePackTC} from '../../../bll/packsReducer';
 import {GetPacksResponseType, PacksRequestType} from '../../../dal/packs-api';
 import {setAppErrorAC} from '../../../bll/appReducer';
 import {Redirect} from 'react-router-dom';
@@ -10,7 +10,7 @@ import {Redirect} from 'react-router-dom';
 export function PacksContainer() {
     const isLogined = useSelector<AppRootStateType, boolean>(state => state.app.isLogined)
     const userId = useSelector<AppRootStateType, string>(state => state.app.userData._id)
-    const requestData = useSelector<AppRootStateType, PacksRequestType>(state => state.packs.requestData)
+    const requestPacksData = useSelector<AppRootStateType, PacksRequestType>(state => state.packs.requestPacksData)
     const packsData = useSelector<AppRootStateType, GetPacksResponseType>(state => state.packs.packsData)
 
     const isBusy = useSelector<AppRootStateType, boolean>(state => state.app.isBusy)
@@ -24,8 +24,9 @@ export function PacksContainer() {
 
         return () => {
             dispatch(setAppErrorAC(''))
+            dispatch(setPacksDataAC({} as GetPacksResponseType))
         }
-    }, [requestData])
+    }, [requestPacksData])
 
     const addPress = () => {
         dispatch(addPackTC())
