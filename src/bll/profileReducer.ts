@@ -1,5 +1,5 @@
 import {Dispatch} from 'redux';
-import {setAppBusyAC, setAppErrorAC, clearAppLoginAC, setUserDataAC} from './appReducer';
+import {setAppBusyAC, setAppErrorAC, setAppLoginAC, setUserDataAC} from './appReducer';
 import {authAPI} from '../dal/auth-api';
 
 const initialState = {
@@ -35,7 +35,7 @@ export const logoutTC = () => (dispatch: Dispatch) => {
     dispatch(setAppBusyAC(true))
     authAPI.logout()
         .then(response => {
-            dispatch(clearAppLoginAC(false))
+            dispatch(setAppLoginAC(false))
         })
         .catch(error => {
             dispatch(setAppErrorAC(error.response ? error.response.data.error : error.message))

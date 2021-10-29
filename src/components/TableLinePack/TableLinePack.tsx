@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import {NavLink} from 'react-router-dom';
-import s from './TableLine.module.css';
+import s from './TableLinePack.module.css';
 
 
 type PropsType = {
@@ -14,7 +14,7 @@ type PropsType = {
 
 }
 
-export function TableLine(props: PropsType) {
+export function TableLinePack(props: PropsType) {
     let tableStyle: { [key: string]: string } = {
         borderWidth: '1px',
         borderStyle: 'solid',

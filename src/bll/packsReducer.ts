@@ -1,5 +1,5 @@
 import {Dispatch} from 'redux';
-import {setAppBusyAC, setAppErrorAC} from './appReducer';
+import {setAppLoginAC, setAppBusyAC, setAppErrorAC} from './appReducer';
 import {GetPacksResponseType, packsAPI, PacksRequestType} from '../dal/packs-api';
 import {AppRootStateType} from './store';
 
@@ -11,7 +11,7 @@ const initialState = {
         sortPacks: '',
         page: 1,
         pageCount: 10,
-        user_id: ''
+        user_id: '',
     } as PacksRequestType,
 
     packsData: {} as GetPacksResponseType
@@ -21,18 +21,48 @@ type StateType = typeof initialState
 
 export function packsReducer(state: StateType = initialState, action: ActionType): StateType {
     switch (action.type) {
-        case 'PACKS/SET-PACS-DATA':
+        case 'PACKS/SET-PACKS-DATA':
             return {
                 ...state,
-                packsData: {...action.packsData}
+                packsData: {...action.packsData},
             }
 
-        case 'PACKS/SET-PACS-PER-PAGE':
+        case 'PACKS/SET-PACKS-PER-PAGE':
             return {
                 ...state,
                 requestData: {
                     ...state.requestData,
                     pageCount: action.pageCount,
+                },
+            }
+
+        case 'PACKS/SET-MY-PACKS-CHECKBOX':
+            return {
+                ...state,
+                requestData: {
+                    ...state.requestData,
+                    user_id: action.id,
+                }
+            }
+
+        case 'APP/SET-LOGIN':
+            if (!action.value) {
+                return {
+                    ...state,
+                    requestData: {
+                        ...state.requestData,
+                        user_id: '',
+                    }
+                }
+            }
+            return state
+
+        case 'PACKS/SET-CURRENT-PAGE':
+            return {
+                ...state,
+                requestData: {
+                    ...state.requestData,
+                    page: action.pageNumber,
                 }
             }
 
@@ -42,8 +72,10 @@ export function packsReducer(state: StateType = initialState, action: ActionType
 }
 
 
-export const setPacksDataAC = (packsData: GetPacksResponseType) => ({type: 'PACKS/SET-PACS-DATA', packsData} as const)
-export const setPacksPerPageAC = (pageCount: number) => ({type: 'PACKS/SET-PACS-PER-PAGE', pageCount} as const)
+export const setPacksDataAC = (packsData: GetPacksResponseType) => ({type: 'PACKS/SET-PACKS-DATA', packsData} as const)
+export const setPacksPerPageAC = (pageCount: number) => ({type: 'PACKS/SET-PACKS-PER-PAGE', pageCount} as const)
+export const setMyPacksCheckBoxAC = (id: string) => ({type: 'PACKS/SET-MY-PACKS-CHECKBOX', id} as const)
+export const setCurrentPageAC = (pageNumber: number) => ({type: 'PACKS/SET-CURRENT-PAGE', pageNumber} as const)
 
 
 export const getPacksTC = () => (dispatch: Dispatch, getState: () => AppRootStateType) => {
@@ -58,6 +90,14 @@ export const getPacksTC = () => (dispatch: Dispatch, getState: () => AppRootStat
         })
         .catch(error => {
             dispatch(setAppErrorAC(error.response ? error.response.data.error : error.message))
+/*
+            const errorMessage = error.response ? error.response.data.error : error.message
+            if (errorMessage.indexOf('you are not authorized') >= 0) {
+                dispatch(setAppLoginAC(false))
+            } else {
+                dispatch(setAppErrorAC(errorMessage))
+            }
+ */
         })
         .finally(() => {
             dispatch(setAppBusyAC(false))
@@ -105,7 +145,7 @@ export const updatePackTC = (_id: string) => (dispatch: any) => {
     dispatch(setAppErrorAC(''))
     dispatch(setAppBusyAC(true))
 
-    packsAPI.updatePack({_id, name: 'Updated name!'})
+    packsAPI.updatePack({_id, name: 'Updated SuperPuperName!'})
         .then(response => {
             dispatch(getPacksTC())
 
@@ -120,5 +160,9 @@ export const updatePackTC = (_id: string) => (dispatch: any) => {
 
 
 type ActionType =
+    | ReturnType<typeof setAppLoginAC>
+
     | ReturnType<typeof setPacksDataAC>
     | ReturnType<typeof setPacksPerPageAC>
+    | ReturnType<typeof setMyPacksCheckBoxAC>
+    | ReturnType<typeof setCurrentPageAC>

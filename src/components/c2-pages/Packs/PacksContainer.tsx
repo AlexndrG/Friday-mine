@@ -9,6 +9,7 @@ import {Redirect} from 'react-router-dom';
 
 export function PacksContainer() {
     const isLogined = useSelector<AppRootStateType, boolean>(state => state.app.isLogined)
+    const userId = useSelector<AppRootStateType, string>(state => state.app.userData._id)
     const requestData = useSelector<AppRootStateType, PacksRequestType>(state => state.packs.requestData)
     const packsData = useSelector<AppRootStateType, GetPacksResponseType>(state => state.packs.packsData)
 
@@ -45,6 +46,7 @@ export function PacksContainer() {
     return (
         <>
             <Packs
+                userId={userId}
                 packs={packsData}
                 isBusy={isBusy}
                 error={error}

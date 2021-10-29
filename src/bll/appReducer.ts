@@ -52,7 +52,7 @@ export function appReducer(state: StateType = initialState, action: ActionType):
 export const setAppInitializedAC = () => ({type: 'APP/SET-INITIALIZED'} as const)
 export const setAppBusyAC = (value: boolean) => ({type: 'APP/SET-BUSY', value} as const)
 export const setAppErrorAC = (errorText: string) => ({type: 'APP/SET-ERROR', errorText} as const)
-export const clearAppLoginAC = (value: boolean) => ({type: 'APP/SET-LOGIN', value} as const)
+export const setAppLoginAC = (value: boolean) => ({type: 'APP/SET-LOGIN', value} as const)
 export const setUserDataAC = (userData: LoginResponseType) => ({type: 'APP/SET-USER-DATA', userData} as const)
 
 export const initializeTC = () => (dispatch: Dispatch) => {
@@ -72,5 +72,5 @@ type ActionType =
     | ReturnType<typeof setAppInitializedAC>
     | ReturnType<typeof setAppBusyAC>
     | ReturnType<typeof setAppErrorAC>
-    | ReturnType<typeof clearAppLoginAC>
+    | ReturnType<typeof setAppLoginAC>
     | ReturnType<typeof setUserDataAC>

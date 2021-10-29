@@ -7,6 +7,7 @@ import {setPacksPerPageAC} from '../../bll/packsReducer';
 const perPageArr = [5, 10, 15]
 
 export function PacksPerPage() {
+    const isBusy = useSelector<AppRootStateType, boolean>(state => state.app.isBusy)
     const pageCount = useSelector<AppRootStateType, number | undefined>(state => state.packs.requestData.pageCount) || perPageArr[1]
     const dispatch = useDispatch()
 
@@ -16,7 +17,9 @@ export function PacksPerPage() {
             {perPageArr.map(p =>
                 <div
                     className={s.item + ' ' + (p === pageCount ? s.itemActive : '')}
-                    onClick={() => dispatch(setPacksPerPageAC(p))}
+                    onClick={() => {
+                        if (!isBusy && p !== pageCount) dispatch(setPacksPerPageAC(p))
+                    }}
                 >
                     {p}
                 </div>)

@@ -2,11 +2,14 @@ import React from 'react';
 import s from './Packs.module.css'
 import {Loader} from '../../Loader/Loader';
 import {GetPacksResponseType} from '../../../dal/packs-api';
-import {TableLine} from '../../TableLine/TableLine';
+import {TableLinePack} from '../../TableLinePack/TableLinePack';
 import SuperButton from '../../c1-common/c2-SuperButton/SuperButton';
-import { PacksPerPage } from '../../PacksPerPage/PacksPerPage';
+import {PacksPerPage} from '../../PacksPerPage/PacksPerPage';
+import {MyPacksCheckBox} from '../../MyPacksCheckBox/MyPacksCheckBox';
+import {Paginator} from '../../Paginator/Paginator';
 
 type PropsType = {
+    userId: string
     packs: GetPacksResponseType
     isBusy: boolean
     error: string
@@ -22,7 +25,7 @@ export function Packs(props: PropsType) {
 
             <div className={s.form}>
 
-                <TableLine
+                <TableLinePack
                     head={true}
                     nameFieldName={'Name'}
                     nameFieldLink={''}
@@ -42,7 +45,7 @@ export function Packs(props: PropsType) {
                 {
                     props.packs.cardPacks &&
                     props.packs.cardPacks.map(c =>
-                        <TableLine
+                        <TableLinePack
                             key={c._id}
                             head={false}
                             nameFieldName={c.name}
@@ -53,12 +56,12 @@ export function Packs(props: PropsType) {
                             buttonsFieldButtons={
                                 [
                                     <SuperButton
-                                        onClick={()=>props.delPress(c._id)}
-                                        disabled={props.isBusy}
+                                        onClick={() => props.delPress(c._id)}
+                                        disabled={props.isBusy || c.user_id !== props.userId}
                                     >del</SuperButton>,
                                     <SuperButton
-                                        onClick={()=>props.updatePress(c._id)}
-                                        disabled={props.isBusy}
+                                        onClick={() => props.updatePress(c._id)}
+                                        disabled={props.isBusy || c.user_id !== props.userId}
                                     >update</SuperButton>
                                 ]
                             }
@@ -66,7 +69,15 @@ export function Packs(props: PropsType) {
                     )
                 }
 
-                <PacksPerPage/>
+                <div className={s.footBlocks}>
+                    <div className={s.footBlockLeft}>
+                        <MyPacksCheckBox/>
+                        <PacksPerPage/>
+                    </div>
+                    <div className={s.footBlockRight}>
+                        <Paginator/>
+                    </div>
+                </div>
             </div>
 
 

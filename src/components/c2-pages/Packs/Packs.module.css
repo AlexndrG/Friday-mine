@@ -16,6 +16,24 @@
     margin: 10px 0;
 }
 
+.footBlocks {
+    display: flex;
+    justify-content: space-between;
+    /*border: 1px dashed red;*/
+}
+
+.footBlockLeft {
+    display: flex;
+    /*border: 1px dotted green;*/
+    /*margin: 5px;*/
+}
+
+.footBlockRight {
+    display: flex;
+    /*border: 1px dotted blue;*/
+    /*margin: 5px;*/
+}
+
 .error {
     color: red;
     margin: 10px 0 0 20px;
