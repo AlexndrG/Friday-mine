@@ -36,6 +36,15 @@ export function Packs(props: PropsType) {
         )
     }
 
+    const sortButtons = (sortParameter: string) => {
+        return [
+            // sortButton('1' + sortParameter, '?'),
+            // sortButton('0' + sortParameter, String.fromCharCode(191)),
+            sortButton('1' + sortParameter, '<', 'Ascending'),
+            sortButton('0' + sortParameter, '>', 'Descending'),
+        ]
+    }
+
     return (
         <div className={s.main}>
             <div className={s.titlePropgressError}>
@@ -70,26 +79,11 @@ export function Packs(props: PropsType) {
                     head={true}
                     nameFieldName={'Name'}
                     nameFieldLink={''}
-                    nameFieldButtons={
-                        [
-                            sortButton('0name', '<', 'Ascending'),
-                            sortButton('1name', '>', 'Descending'),
-                        ]
-                    }
+                    nameFieldButtons={sortButtons('name')}
                     cardsCountField={'Cards count'}
-                    cardsCountFieldButtons={
-                        [
-                            sortButton('0cardsCount', '<', 'Ascending'),
-                            sortButton('1cardsCount', '>', 'Descending'),
-                        ]
-                    }
+                    cardsCountFieldButtons={sortButtons('cardsCount')}
                     updatedField={'Updated'}
-                    updatedFieldButtons={
-                        [
-                            sortButton('0updated', '<', 'Ascending'),
-                            sortButton('1updated', '>', 'Descending'),
-                        ]
-                    }
+                    updatedFieldButtons={sortButtons('updated')}
                     buttonsFieldName={'Actions: '}
                     buttonsFieldButtons={
                         [
