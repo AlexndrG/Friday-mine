@@ -12,27 +12,27 @@ type PropsType = {
 export function Cards(props: PropsType) {
     return (
         <div className={s.main}>
-            <h1>Cards</h1>
+            <div className={s.titlePropgressError}>
+                <h1>Cards</h1>
+                {
+                    props.isBusy &&
+                    <div>
+                        <Loader/>
+                    </div>
+                }
+                {
+                    props.error &&
+                    <div className={s.error}>
+                        {props.error}
+                    </div>
+                }
+            </div>
 
             <div className={s.form}>
 
                 {JSON.stringify(props.cards.cards)}
 
             </div>
-
-
-
-
-            {props.isBusy &&
-            <div>
-                <Loader/>
-            </div>}
-
-            {props.error &&
-            <div className={s.error}>
-                {props.error}
-            </div>}
-
         </div>
     )
 }

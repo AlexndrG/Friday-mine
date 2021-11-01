@@ -5,3 +5,12 @@
     /*margin: 10px 15px 0 10px;*/
     margin: 0 0 10px 0;
 }
+
+.superRange {
+    width: 100px;
+}
+
+.rangeValue {
+    text-align: center;
+    width: 50px;
+}

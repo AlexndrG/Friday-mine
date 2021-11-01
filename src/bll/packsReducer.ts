@@ -7,7 +7,7 @@ const initialState = {
     requestPacksData: {
         packName: '',
         min: 0,
-        max: 1000,
+        max: 0,
         sortPacks: '',
         page: 1,
         pageCount: 10,
@@ -25,6 +25,7 @@ export function packsReducer(state: StateType = initialState, action: ActionType
             return {
                 ...state,
                 packsData: {...action.packsData},
+
             }
 
         case 'PACKS/SET-PACKS-PER-PAGE':
@@ -75,6 +76,25 @@ export function packsReducer(state: StateType = initialState, action: ActionType
                 }
             }
 
+        case 'PACKS/SET-RANGE-SEARCH':
+            return {
+                ...state,
+                requestPacksData: {
+                    ...state.requestPacksData,
+                    min: action.min,
+                    max: action.max,
+                }
+            }
+
+        case 'PACKS/SET-SORT-PACKS':
+            return {
+                ...state,
+                requestPacksData: {
+                    ...state.requestPacksData,
+                    sortPacks: action.sortString,
+                }
+            }
+
 
         default:
             return state
@@ -87,7 +107,8 @@ export const setPacksPerPageAC = (pageCount: number) => ({type: 'PACKS/SET-PACKS
 export const setMyPacksCheckBoxAC = (id: string) => ({type: 'PACKS/SET-MY-PACKS-CHECKBOX', id} as const)
 export const setCurrentPageAC = (pageNumber: number) => ({type: 'PACKS/SET-CURRENT-PAGE', pageNumber} as const)
 export const setNameSearchAC = (text: string) => ({type: 'PACKS/SET-NAME-SEARCH', text} as const)
-
+export const setRangeSearchAC = (min: number, max: number) => ({type: 'PACKS/SET-RANGE-SEARCH', min, max} as const)
+export const setSortPacksAC = (sortString: string) => ({type: 'PACKS/SET-SORT-PACKS', sortString} as const)
 
 export const getPacksTC = () => (dispatch: Dispatch, getState: () => AppRootStateType) => {
     dispatch(setAppErrorAC(''))
@@ -97,18 +118,9 @@ export const getPacksTC = () => (dispatch: Dispatch, getState: () => AppRootStat
     packsAPI.getPacks(requestPacksData)
         .then(response => {
             dispatch(setPacksDataAC(response.data))
-
         })
         .catch(error => {
             dispatch(setAppErrorAC(error.response ? error.response.data.error : error.message))
-/*
-            const errorMessage = error.response ? error.response.data.error : error.message
-            if (errorMessage.indexOf('you are not authorized') >= 0) {
-                dispatch(setAppLoginAC(false))
-            } else {
-                dispatch(setAppErrorAC(errorMessage))
-            }
- */
         })
         .finally(() => {
             dispatch(setAppBusyAC(false))
@@ -123,7 +135,6 @@ export const addPackTC = () => (dispatch: any) => {
     packsAPI.addPack({name: 'SuperPuperName'})
         .then(response => {
             dispatch(getPacksTC())
-
         })
         .catch(error => {
             dispatch(setAppErrorAC(error.response ? error.response.data.error : error.message))
@@ -141,13 +152,12 @@ export const delPackTC = (id: string) => (dispatch: any) => {
     packsAPI.delPack(id)
         .then(response => {
             dispatch(getPacksTC())
-
         })
         .catch(error => {
             dispatch(setAppErrorAC(error.response ? error.response.data.error : error.message))
         })
         .finally(() => {
-            dispatch(setAppBusyAC(false))
+           dispatch(setAppBusyAC(false))
         })
 }
 
@@ -178,3 +188,5 @@ type ActionType =
     | ReturnType<typeof setMyPacksCheckBoxAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setNameSearchAC>
+    | ReturnType<typeof setRangeSearchAC>
+    | ReturnType<typeof setSortPacksAC>

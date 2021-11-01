@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './PacksNameSearch.module.css';
 import SuperInputText from '../c1-common/c1-SuperInputText/SuperInputText';
 import {useDispatch, useSelector} from 'react-redux';

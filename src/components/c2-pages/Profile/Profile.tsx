@@ -28,7 +28,21 @@ type PropsType = {
 export function Profile(props: PropsType) {
     return (
         <div className={s.main}>
-            <h1>Profile</h1>
+            <div className={s.titlePropgressError}>
+                <h1>Profile</h1>
+                {
+                    props.isBusy &&
+                    <div>
+                        <Loader/>
+                    </div>
+                }
+                {
+                    props.error &&
+                    <div className={s.error}>
+                        {props.error}
+                    </div>
+                }
+            </div>
 
             <div className={s.form}>
                 <div className={s.item}>
@@ -88,17 +102,6 @@ export function Profile(props: PropsType) {
                     </SuperButton>
                 </div>
             </div>
-
-
-            {props.isBusy &&
-            <div>
-                <Loader/>
-            </div>}
-
-            {props.error &&
-            <div className={s.error}>
-                {props.error}
-            </div>}
 
         </div>
     )

@@ -20,7 +20,21 @@ type PropsType = {
 export function Login(props: PropsType) {
     return (
         <div className={s.main}>
-            <h1>Login</h1>
+            <div className={s.titlePropgressError}>
+                <h1>Login</h1>
+                {
+                    props.isBusy &&
+                    <div>
+                        <Loader/>
+                    </div>
+                }
+                {
+                    props.error &&
+                    <div className={s.error}>
+                        {props.error}
+                    </div>
+                }
+            </div>
 
             <div className={s.form}>
                 <div className={s.item}>
@@ -107,16 +121,6 @@ export function Login(props: PropsType) {
             </div>
 
             {/*======================================================*/}
-
-            {props.isBusy &&
-            <div>
-                <Loader/>
-            </div>}
-
-            {props.error &&
-            <div className={s.error}>
-                {props.error}
-            </div>}
 
         </div>
     )

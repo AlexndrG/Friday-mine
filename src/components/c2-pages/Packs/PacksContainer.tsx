@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {Packs} from './Packs';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../../bll/store';
-import {addPackTC, delPackTC, getPacksTC, setPacksDataAC, updatePackTC} from '../../../bll/packsReducer';
+import {addPackTC, delPackTC, getPacksTC, setSortPacksAC, updatePackTC} from '../../../bll/packsReducer';
 import {GetPacksResponseType, PacksRequestType} from '../../../dal/packs-api';
 import {setAppErrorAC} from '../../../bll/appReducer';
 import {Redirect} from 'react-router-dom';
@@ -24,9 +24,13 @@ export function PacksContainer() {
 
         return () => {
             dispatch(setAppErrorAC(''))
-            dispatch(setPacksDataAC({} as GetPacksResponseType))
+            // dispatch(setPacksDataAC({} as GetPacksResponseType))
         }
     }, [requestPacksData])
+
+    const sortPress = (sortString: string) => {
+        dispatch(setSortPacksAC(sortString))
+    }
 
     const addPress = () => {
         dispatch(addPackTC())
@@ -48,9 +52,10 @@ export function PacksContainer() {
         <>
             <Packs
                 userId={userId}
-                packs={packsData}
+                packsData={packsData}
                 isBusy={isBusy}
                 error={error}
+                sortPress={sortPress}
                 addPress={addPress}
                 delPress={delPress}
                 updatePress={updatePress}

@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../bll/store';
 import {setPacksPerPageAC} from '../../bll/packsReducer';
 
-const perPageArr = [5, 10, 15]
+const perPageArr = [5, 10, 15, 20]
 
 export function PacksPerPage() {
     const isBusy = useSelector<AppRootStateType, boolean>(state => state.app.isBusy)

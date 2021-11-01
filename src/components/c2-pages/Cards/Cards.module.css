@@ -1,6 +1,11 @@
 .main {
 }
 
+.titlePropgressError {
+    display: flex;
+    align-items: center;
+}
+
 .form {
     display: inline-block;
     width: 90%;

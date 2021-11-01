@@ -6,7 +6,7 @@ import SuperButton from '../c1-common/c2-SuperButton/SuperButton';
 import {setCurrentPageAC} from '../../bll/packsReducer';
 
 const pageButtons = ['|<', '<<', '<', '>', '>>', '>|']
-const pageButtonsTitle = ['first', '-10', 'previous', 'next', '+10', 'last']
+const pageButtonsTitle = ['First', '-10', 'Previous', 'Next', '+10', 'Last']
 
 export function Paginator() {
     const isBusy = useSelector<AppRootStateType, boolean>(state => state.app.isBusy)

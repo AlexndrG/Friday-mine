@@ -1,6 +1,11 @@
 .main {
 }
 
+.titlePropgressError {
+    display: flex;
+    align-items: center;
+}
+
 .form {
     display: inline-block;
     width: 90%;
@@ -50,6 +55,14 @@
     display: flex;
     /*border: 1px dotted blue;*/
     /*margin: 5px;*/
+}
+
+.buttonSort {
+    margin-left: 3px;
+}
+
+.buttonActions {
+    margin-right: 5px;
 }
 
 .error {
