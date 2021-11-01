@@ -30,25 +30,26 @@ export function DoubleRangeCardsCount() {
     }, [minValue, maxValue])
 
     useEffect(() => {
-        setMinRangeValue(minCardsCount)
-        setMaxRangeValue(maxCardsCount)
-        if (minCardsCount !== minValue || maxCardsCount > maxValue) {
-            dispatch(setRangeSearchAC(minCardsCount, maxCardsCount))
-        }
         /*
-                let sortFlag = false
-                if (minRangeValue > maxCardsCount) {
-                    setMinRangeValue(minCardsCount)
-                    sortFlag = true
-                }
-                if (maxRangeValue > maxCardsCount) {
-                    setMaxRangeValue(maxCardsCount)
-                    sortFlag = true
-                }
-                if (sortFlag) {
+                setMinRangeValue(minCardsCount)
+                setMaxRangeValue(maxCardsCount)
+                if (minCardsCount !== minValue || maxCardsCount > maxValue) {
                     dispatch(setRangeSearchAC(minCardsCount, maxCardsCount))
                 }
-        */
+                */
+
+        let sortFlag = false
+        if (minRangeValue > maxCardsCount) {
+            setMinRangeValue(minCardsCount)
+            sortFlag = true
+        }
+        if (maxRangeValue > maxCardsCount) {
+            setMaxRangeValue(maxCardsCount)
+            sortFlag = true
+        }
+        if (sortFlag) {
+            dispatch(setRangeSearchAC(minCardsCount, maxCardsCount))
+        }
     }, [minCardsCount, maxCardsCount])
 
 

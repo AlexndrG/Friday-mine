@@ -56,6 +56,7 @@ export function PacksContainer() {
                 isBusy={isBusy}
                 error={error}
                 sortPress={sortPress}
+                sortName={requestPacksData.sortPacks || ''}
                 addPress={addPress}
                 delPress={delPress}
                 updatePress={updatePress}

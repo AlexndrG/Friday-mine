@@ -16,16 +16,17 @@ type PropsType = {
     isBusy: boolean
     error: string
     sortPress: (sortString: string) => void
+    sortName: string
     addPress: () => void
     delPress: (id: string) => void
     updatePress: (id: string) => void
 }
 
 export function Packs(props: PropsType) {
-    const sortButton = (sortParameter: string, buttonName: string, title:string) => {
+    const sortButton = (sortParameter: string, buttonName: string, title: string) => {
         return (
             <SuperButton
-                className={s.buttonSort}
+                className={s.buttonSort + ' ' + (sortParameter === props.sortName ? s.sortButtonActive : '')}
                 onClick={() => props.sortPress(sortParameter)}
                 title={title}
                 disabled={props.isBusy}
@@ -33,15 +34,6 @@ export function Packs(props: PropsType) {
                 {buttonName}
             </SuperButton>
         )
-    }
-
-    const sortButtons = (sortParameter: string) => {
-        return [
-            // sortButton('1' + sortParameter, '?'),
-            // sortButton('0' + sortParameter, String.fromCharCode(191)),
-            sortButton('1' + sortParameter, '<','Ascending'),
-            sortButton('0' + sortParameter, '>','Descending'),
-        ]
     }
 
     return (
@@ -78,11 +70,26 @@ export function Packs(props: PropsType) {
                     head={true}
                     nameFieldName={'Name'}
                     nameFieldLink={''}
-                    nameFieldButtons={sortButtons('name')}
+                    nameFieldButtons={
+                        [
+                            sortButton('0name', '<', 'Ascending'),
+                            sortButton('1name', '>', 'Descending'),
+                        ]
+                    }
                     cardsCountField={'Cards count'}
-                    cardsCountFieldButtons={sortButtons('cardsCount')}
+                    cardsCountFieldButtons={
+                        [
+                            sortButton('0cardsCount', '<', 'Ascending'),
+                            sortButton('1cardsCount', '>', 'Descending'),
+                        ]
+                    }
                     updatedField={'Updated'}
-                    updatedFieldButtons={sortButtons('updated')}
+                    updatedFieldButtons={
+                        [
+                            sortButton('0updated', '<', 'Ascending'),
+                            sortButton('1updated', '>', 'Descending'),
+                        ]
+                    }
                     buttonsFieldName={'Actions: '}
                     buttonsFieldButtons={
                         [
