@@ -20,7 +20,7 @@ type PropsType = {
 export function Login(props: PropsType) {
     return (
         <div className={s.main}>
-            <div className={s.titlePropgressError}>
+            <div className={s.titleProgressError}>
                 <h1>Login</h1>
                 {
                     props.isBusy &&

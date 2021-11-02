@@ -15,7 +15,7 @@ type PropsType = {
 export function PwdRestore(props: PropsType) {
     return (
         <div className={s.main}>
-            <div className={s.titlePropgressError}>
+            <div className={s.titleProgressError}>
                 <h1>Restore Password</h1>
                 {
                     props.isBusy &&

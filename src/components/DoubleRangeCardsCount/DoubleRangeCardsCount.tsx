@@ -75,6 +75,9 @@ export function DoubleRangeCardsCount() {
 
     const setNewRange = () => {
         if (minValue !== minRangeValue || maxValue !== maxRangeValue) {
+            if (maxRangeValue === 0) {
+                setMaxRangeValue(maxCardsCount)
+            }
             dispatch(setRangeSearchAC(minRangeValue, maxRangeValue))
         }
     }

@@ -1,7 +1,7 @@
 .main {
 }
 
-.titlePropgressError {
+.titleProgressError {
     display: flex;
     align-items: center;
 }
@@ -29,4 +29,6 @@
 .error {
     color: red;
     margin: 10px 0 0 20px;
+    padding: 5px;
+    border: 1px solid red;
 }

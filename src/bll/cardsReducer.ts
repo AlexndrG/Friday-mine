@@ -3,19 +3,20 @@ import {cardsAPI, CardsRequestType, GetCardsResponseType} from '../dal/cards-api
 import {AppRootStateType} from './store';
 import {setAppBusyAC, setAppErrorAC} from './appReducer';
 
-const initialState = {
-    requestCardsData: {
-        cardAnswer: '',
-        cardQuestion: '',
-        cardsPack_id: '',
-        min: 0,
-        max: 0,
-        sortCards: '',
-        page: 1,
-        pageCount: 10,
-    } as CardsRequestType,
+const initRequestCardsData = {
+    cardAnswer: '',
+    cardQuestion: '',
+    cardsPack_id: '',
+    min: 0,
+    max: 0,
+    sortCards: '',
+    page: 1,
+    pageCount: 5,
+}
 
-    cardsData: {} as GetCardsResponseType
+const initialState = {
+    requestCardsData: initRequestCardsData as CardsRequestType,
+    cardsData: {} as GetCardsResponseType,
 }
 type StateType = typeof initialState
 
@@ -28,6 +29,51 @@ export function cardsReducer(state: StateType = initialState, action: ActionType
                 cardsData: {...action.cardsData},
             }
 
+        case 'CARDS/SET-INIT-CARDS-DATA':
+            return {
+                ...state,
+                requestCardsData: initRequestCardsData,
+                cardsData: {} as GetCardsResponseType,
+            }
+
+        case 'CARDS/SET-CARDS-PER-PAGE':
+            return {
+                ...state,
+                requestCardsData: {
+                    ...state.requestCardsData,
+                    pageCount: action.cardsCount,
+                },
+            }
+
+        case 'CARDS/SET-CURRENT-PAGE':
+            return {
+                ...state,
+                requestCardsData: {
+                    ...state.requestCardsData,
+                    page: action.pageNumber,
+                }
+            }
+
+        case 'CARDS/SET-QUESTION-SEARCH':
+            return {
+                ...state,
+                requestCardsData: {
+                    ...state.requestCardsData,
+                    cardQuestion: action.text,
+                }
+            }
+
+        case 'CARDS/SET-ANSWER-SEARCH':
+            return {
+                ...state,
+                requestCardsData: {
+                    ...state.requestCardsData,
+                    cardAnswer: action.text,
+                }
+            }
+
+
+
         default:
             return state
     }
@@ -35,6 +81,11 @@ export function cardsReducer(state: StateType = initialState, action: ActionType
 
 
 export const setCardsDataAC = (cardsData: GetCardsResponseType) => ({type: 'CARDS/SET-CARDS-DATA', cardsData} as const)
+export const setInitCardsDataAC = () => ({type: 'CARDS/SET-INIT-CARDS-DATA'} as const)
+export const setCardsPerPageAC = (cardsCount: number) => ({type: 'CARDS/SET-CARDS-PER-PAGE', cardsCount} as const)
+export const setCurrentCardPageAC = (pageNumber: number) => ({type: 'CARDS/SET-CURRENT-PAGE', pageNumber} as const)
+export const setCardQuestionSearchAC = (text: string) => ({type: 'CARDS/SET-QUESTION-SEARCH', text} as const)
+export const setCardAnswerSearchAC = (text: string) => ({type: 'CARDS/SET-ANSWER-SEARCH', text} as const)
 
 
 export const getCardsTC = (cardsPack_id: string) => (dispatch: Dispatch, getState: () => AppRootStateType) => {
@@ -58,3 +109,8 @@ export const getCardsTC = (cardsPack_id: string) => (dispatch: Dispatch, getStat
 
 type ActionType =
     | ReturnType<typeof setCardsDataAC>
+    | ReturnType<typeof setInitCardsDataAC>
+    | ReturnType<typeof setCardsPerPageAC>
+    | ReturnType<typeof setCurrentCardPageAC>
+    | ReturnType<typeof setCardQuestionSearchAC>
+    | ReturnType<typeof setCardAnswerSearchAC>

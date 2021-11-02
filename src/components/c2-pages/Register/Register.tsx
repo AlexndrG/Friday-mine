@@ -19,7 +19,7 @@ type PropsType = {
 export function Register(props: PropsType) {
     return (
         <div className={s.main}>
-            <div className={s.titlePropgressError}>
+            <div className={s.titleProgressError}>
                 <h1>Register</h1>
                 {
                     props.isBusy &&

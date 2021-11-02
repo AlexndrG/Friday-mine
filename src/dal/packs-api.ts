@@ -23,16 +23,8 @@ export type UpdatePackResponseType = {
     updatedCardsPack: PackType
 }
 
-export type UpdatePackType = {
+export type UpdatePackType = NewPackType & {
     _id: string
-    name?: string
-    path?: string
-    grade?: number
-    shots?: number
-    rating?: number
-    deckCover?: string
-    private?: boolean
-    type?: string
 }
 
 

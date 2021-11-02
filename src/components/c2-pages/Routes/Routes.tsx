@@ -8,6 +8,8 @@ import {RegisterContainer} from '../Register/RegisterContainer';
 import {PwdNewContainer} from '../PwdNew/PwdNewContainer';
 import {PacksContainer} from '../Packs/PacksContainer';
 import {CardsContainer} from '../Cards/CardsContainer';
+import {useDispatch} from 'react-redux';
+import {setInitCardsDataAC} from '../../../bll/cardsReducer';
 
 /*
 логинизация
@@ -31,6 +33,8 @@ export const PATH = {
 
 
 export function Routes() {
+    const dispatch = useDispatch()
+
     return (
         <div>
             <Switch>
@@ -42,7 +46,12 @@ export function Routes() {
                 <Route path={PATH.PASSWORD_RESTORE} render={() => <PwdRestoreContainer/>}/>
                 <Route path={PATH.PASSWORD_NEW} render={() => <PwdNewContainer/>}/>
                 <Route path={PATH.PACKS} render={() => <PacksContainer/>}/>
-                <Route path={PATH.CARDS} render={() => <CardsContainer/>}/>
+
+                {/*<Route path={PATH.CARDS} render={() => <CardsContainer/>}/>*/}
+                <Route path={PATH.CARDS} render={() => {
+                    dispatch(setInitCardsDataAC())
+                    return <CardsContainer/>
+                }}/>
 
                 <Route render={() => <Error404/>}/>
             </Switch>

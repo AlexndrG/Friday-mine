@@ -1,0 +1,12 @@
+.tableHead {
+}
+
+.tableLine {
+}
+
+.item {
+    display: inline-block;
+    box-sizing: border-box;
+    border: solid black;
+    /*margin: 10px 0;*/
+}

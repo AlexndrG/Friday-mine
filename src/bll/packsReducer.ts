@@ -33,7 +33,7 @@ export function packsReducer(state: StateType = initialState, action: ActionType
                 ...state,
                 requestPacksData: {
                     ...state.requestPacksData,
-                    pageCount: action.pageCount,
+                    pageCount: action.packsCount,
                 },
             }
 
@@ -103,10 +103,10 @@ export function packsReducer(state: StateType = initialState, action: ActionType
 
 
 export const setPacksDataAC = (packsData: GetPacksResponseType) => ({type: 'PACKS/SET-PACKS-DATA', packsData} as const)
-export const setPacksPerPageAC = (pageCount: number) => ({type: 'PACKS/SET-PACKS-PER-PAGE', pageCount} as const)
+export const setPacksPerPageAC = (packsCount: number) => ({type: 'PACKS/SET-PACKS-PER-PAGE', packsCount} as const)
 export const setMyPacksCheckBoxAC = (id: string) => ({type: 'PACKS/SET-MY-PACKS-CHECKBOX', id} as const)
-export const setCurrentPageAC = (pageNumber: number) => ({type: 'PACKS/SET-CURRENT-PAGE', pageNumber} as const)
-export const setNameSearchAC = (text: string) => ({type: 'PACKS/SET-NAME-SEARCH', text} as const)
+export const setCurrentPackPageAC = (pageNumber: number) => ({type: 'PACKS/SET-CURRENT-PAGE', pageNumber} as const)
+export const setPackNameSearchAC = (text: string) => ({type: 'PACKS/SET-NAME-SEARCH', text} as const)
 export const setRangeSearchAC = (min: number, max: number) => ({type: 'PACKS/SET-RANGE-SEARCH', min, max} as const)
 export const setSortPacksAC = (sortString: string) => ({type: 'PACKS/SET-SORT-PACKS', sortString} as const)
 
@@ -128,7 +128,7 @@ export const getPacksTC = () => (dispatch: Dispatch, getState: () => AppRootStat
 }
 
 // export const addPackTC = () => (dispatch: Dispatch) => {
-export const addPackTC = () => (dispatch: any) => {
+export const addPackTC = () => (dispatch: Dispatch<any>) => {
     dispatch(setAppErrorAC(''))
     dispatch(setAppBusyAC(true))
 
@@ -145,7 +145,7 @@ export const addPackTC = () => (dispatch: any) => {
 }
 
 // export const delPackTC = () => (dispatch: Dispatch) => {
-export const delPackTC = (id: string) => (dispatch: any) => {
+export const delPackTC = (id: string) => (dispatch: Dispatch<any>) => {
     dispatch(setAppErrorAC(''))
     dispatch(setAppBusyAC(true))
 
@@ -162,7 +162,7 @@ export const delPackTC = (id: string) => (dispatch: any) => {
 }
 
 // export const updatePackTC = () => (dispatch: Dispatch) => {
-export const updatePackTC = (_id: string) => (dispatch: any) => {
+export const updatePackTC = (_id: string) => (dispatch: Dispatch<any>) => {
     dispatch(setAppErrorAC(''))
     dispatch(setAppBusyAC(true))
 
@@ -186,7 +186,7 @@ type ActionType =
     | ReturnType<typeof setPacksDataAC>
     | ReturnType<typeof setPacksPerPageAC>
     | ReturnType<typeof setMyPacksCheckBoxAC>
-    | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setNameSearchAC>
+    | ReturnType<typeof setCurrentPackPageAC>
+    | ReturnType<typeof setPackNameSearchAC>
     | ReturnType<typeof setRangeSearchAC>
     | ReturnType<typeof setSortPacksAC>

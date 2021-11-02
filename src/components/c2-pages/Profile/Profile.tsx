@@ -28,7 +28,7 @@ type PropsType = {
 export function Profile(props: PropsType) {
     return (
         <div className={s.main}>
-            <div className={s.titlePropgressError}>
+            <div className={s.titleProgressError}>
                 <h1>Profile</h1>
                 {
                     props.isBusy &&

@@ -4,11 +4,12 @@ import {AppRootStateType} from '../../../bll/store';
 import {Redirect, useParams} from 'react-router-dom';
 import { Cards } from './Cards';
 import {setAppErrorAC} from '../../../bll/appReducer';
-import {getCardsTC, setCardsDataAC} from '../../../bll/cardsReducer';
+import {getCardsTC} from '../../../bll/cardsReducer';
 import {CardsRequestType, GetCardsResponseType} from '../../../dal/cards-api';
 
 export function CardsContainer () {
     const isLogined = useSelector<AppRootStateType, boolean>(state => state.app.isLogined)
+    const userId = useSelector<AppRootStateType, string>(state => state.app.userData._id)
     const requestCardsData = useSelector<AppRootStateType, CardsRequestType>(state => state.cards.requestCardsData)
     const cardsData = useSelector<AppRootStateType, GetCardsResponseType>(state => state.cards.cardsData)
     const isBusy = useSelector<AppRootStateType, boolean>(state => state.app.isBusy)
@@ -21,12 +22,10 @@ export function CardsContainer () {
     useEffect(() => {
         if (isLogined) {
             dispatch(getCardsTC(cardsPackId))
-
         }
 
         return () => {
             dispatch(setAppErrorAC(''))
-            dispatch(setCardsDataAC({} as GetCardsResponseType))
         }
     }, [requestCardsData])
 
@@ -39,7 +38,8 @@ export function CardsContainer () {
     return (
         <>
             <Cards
-                cards={cardsData}
+                userId={userId}
+                cardsData={cardsData}
                 isBusy={isBusy}
                 error={error}
             />

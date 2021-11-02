@@ -1,7 +1,7 @@
 .main {
 }
 
-.titlePropgressError {
+.titleProgressError {
     display: flex;
     align-items: center;
 }
@@ -19,6 +19,24 @@
     display: inline-block;
     box-sizing: border-box;
     margin: 10px 0;
+}
+
+.headBlocks {
+    display: flex;
+    justify-content: space-between;
+    /*border: 1px dashed red;*/
+}
+
+.headBlockLeft {
+    display: flex;
+    /*border: 1px dotted green;*/
+    /*margin: 5px;*/
+}
+
+.headBlockRight {
+    display: flex;
+    /*border: 1px dotted blue;*/
+    /*margin: 5px;*/
 }
 
 .footBlocks {
@@ -39,7 +57,21 @@
     /*margin: 5px;*/
 }
 
+.buttonSort {
+    margin-left: 3px;
+}
+
+.sortButtonActive {
+    background: lightgreen;
+}
+
+.buttonActions {
+    margin-right: 5px;
+}
+
 .error {
     color: red;
     margin: 10px 0 0 20px;
+    padding: 5px;
+    border: 1px solid red;
 }

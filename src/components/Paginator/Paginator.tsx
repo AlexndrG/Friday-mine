@@ -3,36 +3,66 @@ import s from './Paginator.module.css'
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../bll/store';
 import SuperButton from '../c1-common/c2-SuperButton/SuperButton';
-import {setCurrentPageAC} from '../../bll/packsReducer';
+import {setCurrentPackPageAC} from '../../bll/packsReducer';
+import {setCurrentCardPageAC} from '../../bll/cardsReducer';
 
 const pageButtons = ['|<', '<<', '<', '>', '>>', '>|']
 const pageButtonsTitle = ['First', '-10', 'Previous', 'Next', '+10', 'Last']
 
-export function Paginator() {
+type PropsType = {
+    packs: boolean
+}
+
+export function Paginator(props: PropsType) {
     const isBusy = useSelector<AppRootStateType, boolean>(state => state.app.isBusy)
-    const cardPacksTotalCount = useSelector<AppRootStateType, number>(state => state.packs.packsData.cardPacksTotalCount)
+    const packsTotalCount = useSelector<AppRootStateType, number>(state => state.packs.packsData.cardPacksTotalCount)
     const packsPerPage = useSelector<AppRootStateType, number>(state => state.packs.packsData.pageCount)
-    const currentPage = useSelector<AppRootStateType, number>(state => state.packs.packsData.page)
+    const packsCurrentPage = useSelector<AppRootStateType, number>(state => state.packs.packsData.page)
+    const cardsTotalCount = useSelector<AppRootStateType, number>(state => state.cards.cardsData.cardsTotalCount)
+    const cardsPerPage = useSelector<AppRootStateType, number>(state => state.cards.cardsData.pageCount)
+    const cardsCurrentPage = useSelector<AppRootStateType, number>(state => state.cards.cardsData.page)
     const dispatch = useDispatch()
 
-    const totalPages = Math.ceil(cardPacksTotalCount / packsPerPage)
+    const totalPages = props.packs
+        ? Math.ceil(packsTotalCount / packsPerPage)
+        : Math.ceil(cardsTotalCount / cardsPerPage)
 
+    const currentPage = props.packs
+        ? packsCurrentPage
+        : cardsCurrentPage
+
+    const setCurrentFunction = props.packs
+        ? setCurrentPackPageAC
+        : setCurrentCardPageAC
 
     const pageFunctions = [
-        setCurrentPageAC(1),
-        setCurrentPageAC(currentPage-10),
-        setCurrentPageAC(currentPage-1),
-        setCurrentPageAC(currentPage+1),
-        setCurrentPageAC(currentPage+10),
-        setCurrentPageAC(totalPages),
+        setCurrentFunction(1),
+        setCurrentFunction(currentPage - 10),
+        setCurrentFunction(currentPage - 1),
+        setCurrentFunction(currentPage + 1),
+        setCurrentFunction(currentPage + 10),
+        setCurrentFunction(totalPages),
     ]
+
     const pageDisables = [
-        function(){return currentPage===1},
-        function(){return currentPage<10},
-        function(){return currentPage===1},
-        function(){return currentPage===totalPages},
-        function(){return currentPage>totalPages-10},
-        function(){return currentPage===totalPages},
+        function () {
+            return currentPage === 1
+        },
+        function () {
+            return currentPage < 10
+        },
+        function () {
+            return currentPage === 1
+        },
+        function () {
+            return currentPage === totalPages
+        },
+        function () {
+            return currentPage > totalPages - 10
+        },
+        function () {
+            return currentPage === totalPages
+        },
     ]
 
     if (currentPage && totalPages) {
@@ -41,10 +71,10 @@ export function Paginator() {
                 Page: {currentPage} of {totalPages}
                 &nbsp;
                 {
-                    pageButtons.map((b,i) =>
+                    pageButtons.map((b, i) =>
                         <SuperButton
                             title={pageButtonsTitle[i]}
-                            onClick={()=>dispatch(pageFunctions[i])}
+                            onClick={() => dispatch(pageFunctions[i])}
                             disabled={isBusy || pageDisables[i]()}
                         >
                             {b}

@@ -17,7 +17,7 @@ type PropsType = {
 export function PwdNew(props: PropsType) {
     return (
         <div className={s.main}>
-            <div className={s.titlePropgressError}>
+            <div className={s.titleProgressError}>
                 <h1>New password</h1>
                 {
                     props.isBusy &&

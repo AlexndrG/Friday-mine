@@ -4,10 +4,10 @@ import {Loader} from '../../Loader/Loader';
 import {GetPacksResponseType} from '../../../dal/packs-api';
 import {TableLinePack} from '../../TableLinePack/TableLinePack';
 import SuperButton from '../../c1-common/c2-SuperButton/SuperButton';
-import {PacksPerPage} from '../../PacksPerPage/PacksPerPage';
+import {PerPage} from '../../PerPage/PerPage';
 import {MyPacksCheckBox} from '../../MyPacksCheckBox/MyPacksCheckBox';
 import {Paginator} from '../../Paginator/Paginator';
-import {PacksNameSearch} from '../../PacksNameSearch/PacksNameSearch';
+import {FieldSearch} from '../../FieldSearch/FieldSearch';
 import {DoubleRangeCardsCount} from '../../DoubleRangeCardsCount/DoubleRangeCardsCount';
 
 type PropsType = {
@@ -47,7 +47,7 @@ export function Packs(props: PropsType) {
 
     return (
         <div className={s.main}>
-            <div className={s.titlePropgressError}>
+            <div className={s.titleProgressError}>
                 <h1>Packs</h1>
                 {
                     props.isBusy &&
@@ -67,7 +67,7 @@ export function Packs(props: PropsType) {
 
                 <div className={s.headBlocks}>
                     <div className={s.headBlockLeft}>
-                        <PacksNameSearch/>
+                        <FieldSearch searchField={'PackName'} nameText={'Name search:'}/>
                     </div>
                     <div className={s.headBlockRight}>
                         <DoubleRangeCardsCount/>
@@ -134,10 +134,10 @@ export function Packs(props: PropsType) {
                 <div className={s.footBlocks}>
                     <div className={s.footBlockLeft}>
                         <MyPacksCheckBox/>
-                        <PacksPerPage/>
+                        <PerPage packs={true} nameText={'Packs per page:'} />
                     </div>
                     <div className={s.footBlockRight}>
-                        <Paginator/>
+                        <Paginator packs={true}/>
                     </div>
                 </div>
             </div>
