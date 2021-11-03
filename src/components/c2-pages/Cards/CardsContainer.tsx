@@ -2,14 +2,12 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../../bll/store';
 import {Redirect, useParams} from 'react-router-dom';
-import { Cards } from './Cards';
+import {Cards} from './Cards';
 import {setAppErrorAC} from '../../../bll/appReducer';
-import {getCardsTC} from '../../../bll/cardsReducer';
+import {addCardTC, delCardTC, getCardsTC, setSortCardsAC, updateCardTC} from '../../../bll/cardsReducer';
 import {CardsRequestType, GetCardsResponseType} from '../../../dal/cards-api';
-import {addPackTC, delPackTC, updatePackTC} from '../../../bll/packsReducer';
-import {Packs} from '../Packs/Packs';
 
-export function CardsContainer () {
+export function CardsContainer() {
     const isLogined = useSelector<AppRootStateType, boolean>(state => state.app.isLogined)
     const userId = useSelector<AppRootStateType, string>(state => state.app.userData._id)
     const requestCardsData = useSelector<AppRootStateType, CardsRequestType>(state => state.cards.requestCardsData)
@@ -17,7 +15,7 @@ export function CardsContainer () {
     const isBusy = useSelector<AppRootStateType, boolean>(state => state.app.isBusy)
     const error = useSelector<AppRootStateType, string>(state => state.app.error)
 
-    const {cardsPackId} = useParams<{cardsPackId: string}>()
+    const {cardsPackId} = useParams<{ cardsPackId: string }>()
 
     const dispatch = useDispatch()
 
@@ -31,14 +29,20 @@ export function CardsContainer () {
         }
     }, [requestCardsData])
 
+    const sortPress = (sortString: string) => {
+        dispatch(setSortCardsAC(sortString))
+    }
 
     const addPress = () => {
+        dispatch(addCardTC(cardsPackId))
     }
 
     const delPress = (id: string) => {
+        dispatch(delCardTC(cardsPackId, id))
     }
 
     const updatePress = (id: string) => {
+        dispatch(updateCardTC(cardsPackId, id))
     }
 
     if (!isLogined) {
@@ -52,7 +56,8 @@ export function CardsContainer () {
                 cardsData={cardsData}
                 isBusy={isBusy}
                 error={error}
-
+                sortPress={sortPress}
+                sortName={requestCardsData.sortCards || ''}
                 addPress={addPress}
                 delPress={delPress}
                 updatePress={updatePress}

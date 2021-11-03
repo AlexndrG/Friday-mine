@@ -169,7 +169,6 @@ export const updatePackTC = (_id: string) => (dispatch: Dispatch<any>) => {
     packsAPI.updatePack({_id, name: 'Updated SuperPuperName!'})
         .then(response => {
             dispatch(getPacksTC())
-
         })
         .catch(error => {
             dispatch(setAppErrorAC(error.response ? error.response.data.error : error.message))

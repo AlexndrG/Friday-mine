@@ -26,7 +26,7 @@ export function Packs(props: PropsType) {
     const sortButton = (sortParameter: string, buttonName: string, title: string) => {
         return (
             <SuperButton
-                className={s.buttonSort + ' ' + (sortParameter === props.sortName ? s.sortButtonActive : '')}
+                className={s.buttonSort + ' ' + (sortParameter === props.sortName ? s.buttonSortActive : '')}
                 onClick={() => props.sortPress(sortParameter)}
                 title={title}
                 disabled={props.isBusy}
@@ -40,8 +40,8 @@ export function Packs(props: PropsType) {
         return [
             // sortButton('1' + sortParameter, '?'),
             // sortButton('0' + sortParameter, String.fromCharCode(191)),
-            sortButton('1' + sortParameter, '<', 'Ascending'),
-            sortButton('0' + sortParameter, '>', 'Descending'),
+            sortButton('1' + sortParameter, '<', 'Sort Ascending'),
+            sortButton('0' + sortParameter, '>', 'Sort Descending'),
         ]
     }
 
@@ -63,7 +63,7 @@ export function Packs(props: PropsType) {
                 }
             </div>
 
-            <div className={s.form} aria-disabled={props.isBusy}>
+            <div className={s.form}>
 
                 <div className={s.headBlocks}>
                     <div className={s.headBlockLeft}>

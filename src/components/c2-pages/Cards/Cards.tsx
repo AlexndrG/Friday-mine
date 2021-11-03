@@ -14,13 +14,34 @@ type PropsType = {
     cardsData: GetCardsResponseType
     isBusy: boolean
     error: string
-
+    sortPress: (sortString: string) => void
+    sortName: string
     addPress: () => void
     delPress: (id: string) => void
     updatePress: (id: string) => void
 }
 
 export function Cards(props: PropsType) {
+    const sortButton = (sortParameter: string, buttonName: string, title: string) => {
+        return (
+            <SuperButton
+                className={s.buttonSort + ' ' + (sortParameter === props.sortName ? s.buttonSortActive : '')}
+                onClick={() => props.sortPress(sortParameter)}
+                title={title}
+                disabled={props.isBusy}
+            >
+                {buttonName}
+            </SuperButton>
+        )
+    }
+
+    const sortButtons = (sortParameter: string) => {
+        return [
+            sortButton('1' + sortParameter, '<', 'Sort Ascending'),
+            sortButton('0' + sortParameter, '>', 'Sort Descending'),
+        ]
+    }
+
     return (
         <div className={s.main}>
             <div className={s.titleProgressError}>
@@ -56,13 +77,13 @@ export function Cards(props: PropsType) {
                     <TableLineCard
                         head={true}
                         questionField={'Question'}
-                        // questionFieldButtons={sortButtons('question')}
+                        questionFieldButtons={sortButtons('question')}
                         answerField={'Answer'}
-                        // answerFieldButtons={sortButtons('answer')}
+                        answerFieldButtons={sortButtons('answer')}
                         gradeField={'Grade'}
-                        // gradeFieldButtons={sortButtons('grade')}
+                        gradeFieldButtons={sortButtons('grade')}
                         updatedField={'Updated'}
-                        // updatedFieldButtons={sortButtons('updated')}
+                        updatedFieldButtons={sortButtons('updated')}
                         buttonsFieldName={'Actions: '}
                         buttonsFieldButtons={
                             [
@@ -82,13 +103,13 @@ export function Cards(props: PropsType) {
                             key={c._id}
                             head={false}
                             questionField={c.question}
-                            // questionFieldButtons={sortButtons('question')}
+                            questionFieldButtons={[]}
                             answerField={c.answer}
-                            // answerFieldButtons={sortButtons('answer')}
+                            answerFieldButtons={[]}
                             gradeField={'' + c.grade}
-                            // gradeFieldButtons={sortButtons('grade')}
+                            gradeFieldButtons={[]}
                             updatedField={c.updated.substr(0, 10) + ' ' + c.updated.substr(11, 8)}
-                            // updatedFieldButtons={sortButtons('updated')}
+                            updatedFieldButtons={[]}
                             buttonsFieldName={''}
                             buttonsFieldButtons={
                                 [

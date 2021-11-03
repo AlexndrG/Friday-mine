@@ -82,6 +82,15 @@ export function cardsReducer(state: StateType = initialState, action: ActionType
                 }
             }
 
+        case 'CARDS/SET-SORT-CARDS':
+            return {
+                ...state,
+                requestCardsData: {
+                    ...state.requestCardsData,
+                    sortCards: action.sortString,
+                }
+            }
+
 
         default:
             return state
@@ -96,6 +105,7 @@ export const setCurrentCardPageAC = (pageNumber: number) => ({type: 'CARDS/SET-C
 export const setCardQuestionSearchAC = (text: string) => ({type: 'CARDS/SET-QUESTION-SEARCH', text} as const)
 export const setCardAnswerSearchAC = (text: string) => ({type: 'CARDS/SET-ANSWER-SEARCH', text} as const)
 export const setCardsRangeSearchAC = (min: number, max: number) => ({type: 'CARDS/SET-RANGE-SEARCH', min, max} as const)
+export const setSortCardsAC = (sortString: string) => ({type: 'CARDS/SET-SORT-CARDS', sortString} as const)
 
 
 export const getCardsTC = (cardsPack_id: string) => (dispatch: Dispatch, getState: () => AppRootStateType) => {
@@ -106,7 +116,57 @@ export const getCardsTC = (cardsPack_id: string) => (dispatch: Dispatch, getStat
     cardsAPI.getCards({...requestCardsData, cardsPack_id})
         .then(response => {
             dispatch(setCardsDataAC(response.data))
+        })
+        .catch(error => {
+            dispatch(setAppErrorAC(error.response ? error.response.data.error : error.message))
+        })
+        .finally(() => {
+            dispatch(setAppBusyAC(false))
+        })
+}
 
+// export const addCardTC = () => (dispatch: Dispatch) => {
+export const addCardTC = (cardsPack_id: string) => (dispatch: Dispatch<any>) => {
+    dispatch(setAppErrorAC(''))
+    dispatch(setAppBusyAC(true))
+
+    cardsAPI.addCard({cardsPack_id, question: 'SuperPuperQuestion', answer: 'SuperPuperAnswer'})
+        .then(response => {
+            dispatch(getCardsTC(cardsPack_id))
+        })
+        .catch(error => {
+            dispatch(setAppErrorAC(error.response ? error.response.data.error : error.message))
+        })
+        .finally(() => {
+            dispatch(setAppBusyAC(false))
+        })
+}
+
+// export const delCardTC = () => (dispatch: Dispatch) => {
+export const delCardTC = (cardsPack_id: string, id: string) => (dispatch: Dispatch<any>) => {
+    dispatch(setAppErrorAC(''))
+    dispatch(setAppBusyAC(true))
+
+    cardsAPI.delCard(id)
+        .then(response => {
+            dispatch(getCardsTC(cardsPack_id))
+        })
+        .catch(error => {
+            dispatch(setAppErrorAC(error.response ? error.response.data.error : error.message))
+        })
+        .finally(() => {
+            dispatch(setAppBusyAC(false))
+        })
+}
+
+// export const updateCardTC = () => (dispatch: Dispatch) => {
+export const updateCardTC = (cardsPack_id: string, _id: string) => (dispatch: Dispatch<any>) => {
+    dispatch(setAppErrorAC(''))
+    dispatch(setAppBusyAC(true))
+
+    cardsAPI.updateCard({_id,  question: 'Updated SuperPuperQuestion', answer: 'Updated SuperPuperAnswer'})
+        .then(response => {
+            dispatch(getCardsTC(cardsPack_id))
         })
         .catch(error => {
             dispatch(setAppErrorAC(error.response ? error.response.data.error : error.message))
@@ -125,3 +185,4 @@ type ActionType =
     | ReturnType<typeof setCardQuestionSearchAC>
     | ReturnType<typeof setCardAnswerSearchAC>
     | ReturnType<typeof setCardsRangeSearchAC>
+    | ReturnType<typeof setSortCardsAC>

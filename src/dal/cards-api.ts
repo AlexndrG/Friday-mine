@@ -24,7 +24,18 @@ export type UpdateCardResponseType = {
     updatedCard: CardType
 }
 
-export type UpdateCardType = NewCardType & {
+export type UpdateCardType = {
+    _id: string
+    question?: string
+    answer?: string
+    grade?: number
+    shots?: number
+    rating?: number
+    answerImg?: string
+    questionImg?: string
+    questionVideo?: string
+    answerVideo?: string
+    type?: string
     comments?: string
 }
 
