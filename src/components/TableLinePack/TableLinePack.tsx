@@ -1,10 +1,11 @@
 import React, {ReactNode} from 'react';
-import {NavLink} from 'react-router-dom';
 import s from './TableLinePack.module.css';
+import {NavLink} from 'react-router-dom';
 
 
 type PropsType = {
     head: boolean
+    isBusy: boolean
     nameFieldName: string
     nameFieldLink: string
     nameFieldButtons: ReactNode[]
@@ -14,7 +15,6 @@ type PropsType = {
     updatedFieldButtons: ReactNode[]
     buttonsFieldName: string
     buttonsFieldButtons: ReactNode[]
-
 }
 
 export function TableLinePack(props: PropsType) {
@@ -37,11 +37,12 @@ export function TableLinePack(props: PropsType) {
 
     return (
         <table style={tableStyle}>
+            <tbody>
             <tr>
                 <td width={'55%'} style={{...cellStyle, textAlign: props.head ? 'center' : 'left'}}>
                     {props.head && props.nameFieldName}
                     {props.head && props.nameFieldButtons}
-                    {!props.head && <NavLink to={'cards/' + props.nameFieldLink}>{props.nameFieldName}</NavLink>}
+                    {!props.head && <NavLink to={props.isBusy ? '#' : ('cards/' + props.nameFieldLink)}>{props.nameFieldName}</NavLink>}
                 </td>
                 <td width={'15%'} style={cellStyle}>
                     {props.cardsCountField}
@@ -56,6 +57,7 @@ export function TableLinePack(props: PropsType) {
                     {props.buttonsFieldButtons}
                 </td>
             </tr>
+            </tbody>
         </table>
     )
 }

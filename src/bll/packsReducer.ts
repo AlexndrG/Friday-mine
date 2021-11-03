@@ -107,7 +107,7 @@ export const setPacksPerPageAC = (packsCount: number) => ({type: 'PACKS/SET-PACK
 export const setMyPacksCheckBoxAC = (id: string) => ({type: 'PACKS/SET-MY-PACKS-CHECKBOX', id} as const)
 export const setCurrentPackPageAC = (pageNumber: number) => ({type: 'PACKS/SET-CURRENT-PAGE', pageNumber} as const)
 export const setPackNameSearchAC = (text: string) => ({type: 'PACKS/SET-NAME-SEARCH', text} as const)
-export const setRangeSearchAC = (min: number, max: number) => ({type: 'PACKS/SET-RANGE-SEARCH', min, max} as const)
+export const setPacksRangeSearchAC = (min: number, max: number) => ({type: 'PACKS/SET-RANGE-SEARCH', min, max} as const)
 export const setSortPacksAC = (sortString: string) => ({type: 'PACKS/SET-SORT-PACKS', sortString} as const)
 
 export const getPacksTC = () => (dispatch: Dispatch, getState: () => AppRootStateType) => {
@@ -188,5 +188,5 @@ type ActionType =
     | ReturnType<typeof setMyPacksCheckBoxAC>
     | ReturnType<typeof setCurrentPackPageAC>
     | ReturnType<typeof setPackNameSearchAC>
-    | ReturnType<typeof setRangeSearchAC>
+    | ReturnType<typeof setPacksRangeSearchAC>
     | ReturnType<typeof setSortPacksAC>

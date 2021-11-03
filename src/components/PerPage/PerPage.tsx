@@ -14,8 +14,8 @@ type PropsType = {
 
 export function PerPage(props: PropsType) {
     const isBusy = useSelector<AppRootStateType, boolean>(state => state.app.isBusy)
-    const packsCount = useSelector<AppRootStateType, number | undefined>(state => state.packs.requestPacksData.pageCount) || perPageArr[1]
-    const cardsCount = useSelector<AppRootStateType, number | undefined>(state => state.cards.requestCardsData.pageCount) || perPageArr[0]
+    const packsCount = useSelector<AppRootStateType, number>(state => state.packs.requestPacksData.pageCount)
+    const cardsCount = useSelector<AppRootStateType, number>(state => state.cards.requestCardsData.pageCount)
     const dispatch = useDispatch()
 
     const activeCount = props.packs ? packsCount : cardsCount
@@ -23,7 +23,7 @@ export function PerPage(props: PropsType) {
     return (
         <div className={s.form}>
             <div className={s.itemText}>{props.nameText}</div>
-            {perPageArr.map((p,i) =>
+            {perPageArr.map((p, i) =>
                 <div
                     key={i}
                     className={s.item + ' ' + (p === activeCount ? s.itemActive : '')}

@@ -14,6 +14,10 @@ type PropsType = {
     cardsData: GetCardsResponseType
     isBusy: boolean
     error: string
+
+    addPress: () => void
+    delPress: (id: string) => void
+    updatePress: (id: string) => void
 }
 
 export function Cards(props: PropsType) {
@@ -63,7 +67,7 @@ export function Cards(props: PropsType) {
                         buttonsFieldButtons={
                             [
                                 <SuperButton
-                                    // onClick={props.addPress}
+                                    onClick={props.addPress}
                                     disabled={props.isBusy || props.cardsData.packUserId !== props.userId}
                                 >Add</SuperButton>,
                             ]
@@ -90,12 +94,12 @@ export function Cards(props: PropsType) {
                                 [
                                     <SuperButton
                                         className={s.buttonActions}
-                                        // onClick={() => props.delPress(c._id)}
+                                        onClick={() => props.delPress(c._id)}
                                         disabled={props.isBusy || props.cardsData.packUserId !== props.userId}
                                     >Del</SuperButton>,
                                     <SuperButton
                                         className={s.buttonActions}
-                                        // onClick={() => props.updatePress(c._id)}
+                                        onClick={() => props.updatePress(c._id)}
                                         disabled={props.isBusy || props.cardsData.packUserId !== props.userId}
                                     >Update</SuperButton>,
                                 ]

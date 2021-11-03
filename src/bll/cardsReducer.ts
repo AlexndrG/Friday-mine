@@ -72,6 +72,15 @@ export function cardsReducer(state: StateType = initialState, action: ActionType
                 }
             }
 
+        case 'CARDS/SET-RANGE-SEARCH':
+            return {
+                ...state,
+                requestCardsData: {
+                    ...state.requestCardsData,
+                    min: action.min,
+                    max: action.max,
+                }
+            }
 
 
         default:
@@ -86,6 +95,7 @@ export const setCardsPerPageAC = (cardsCount: number) => ({type: 'CARDS/SET-CARD
 export const setCurrentCardPageAC = (pageNumber: number) => ({type: 'CARDS/SET-CURRENT-PAGE', pageNumber} as const)
 export const setCardQuestionSearchAC = (text: string) => ({type: 'CARDS/SET-QUESTION-SEARCH', text} as const)
 export const setCardAnswerSearchAC = (text: string) => ({type: 'CARDS/SET-ANSWER-SEARCH', text} as const)
+export const setCardsRangeSearchAC = (min: number, max: number) => ({type: 'CARDS/SET-RANGE-SEARCH', min, max} as const)
 
 
 export const getCardsTC = (cardsPack_id: string) => (dispatch: Dispatch, getState: () => AppRootStateType) => {
@@ -114,3 +124,4 @@ type ActionType =
     | ReturnType<typeof setCurrentCardPageAC>
     | ReturnType<typeof setCardQuestionSearchAC>
     | ReturnType<typeof setCardAnswerSearchAC>
+    | ReturnType<typeof setCardsRangeSearchAC>

@@ -6,6 +6,8 @@ import { Cards } from './Cards';
 import {setAppErrorAC} from '../../../bll/appReducer';
 import {getCardsTC} from '../../../bll/cardsReducer';
 import {CardsRequestType, GetCardsResponseType} from '../../../dal/cards-api';
+import {addPackTC, delPackTC, updatePackTC} from '../../../bll/packsReducer';
+import {Packs} from '../Packs/Packs';
 
 export function CardsContainer () {
     const isLogined = useSelector<AppRootStateType, boolean>(state => state.app.isLogined)
@@ -30,6 +32,14 @@ export function CardsContainer () {
     }, [requestCardsData])
 
 
+    const addPress = () => {
+    }
+
+    const delPress = (id: string) => {
+    }
+
+    const updatePress = (id: string) => {
+    }
 
     if (!isLogined) {
         return <Redirect to={'/login'}/>
@@ -42,6 +52,10 @@ export function CardsContainer () {
                 cardsData={cardsData}
                 isBusy={isBusy}
                 error={error}
+
+                addPress={addPress}
+                delPress={delPress}
+                updatePress={updatePress}
             />
 
         </>

@@ -4,8 +4,9 @@ import SuperRange from '../c1-common/c7-SuperRange/SuperRange';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../bll/store';
 import {GetPacksResponseType} from '../../dal/packs-api';
-import {setRangeSearchAC} from '../../bll/packsReducer';
+import {setPacksRangeSearchAC} from '../../bll/packsReducer';
 import {GetCardsResponseType} from '../../dal/cards-api';
+import {setCardsRangeSearchAC} from '../../bll/cardsReducer';
 
 type PropsType = {
     packs: boolean
@@ -18,30 +19,29 @@ export function DoubleRangeSelector(props: PropsType) {
     const packsData = useSelector<AppRootStateType, GetPacksResponseType>(state => state.packs.packsData)
     const packsMinCardsCount = packsData.minCardsCount
     const packsMaxCardsCount = packsData.maxCardsCount
-    const packsMinValue = useSelector<AppRootStateType, number | undefined>(state => state.packs.requestPacksData.min) || 0
-    const packsMaxValue = useSelector<AppRootStateType, number | undefined>(state => state.packs.requestPacksData.max) || 0
+    const packsMinValue = useSelector<AppRootStateType, number>(state => state.packs.requestPacksData.min)
+    const packsMaxValue = useSelector<AppRootStateType, number>(state => state.packs.requestPacksData.max)
 
     const cardsData = useSelector<AppRootStateType, GetCardsResponseType>(state => state.cards.cardsData)
     const cardsMinGrade = cardsData.minGrade
     const cardsMaxGrade = cardsData.maxGrade
-    const cardsMinValue = useSelector<AppRootStateType, number | undefined>(state => state.cards.requestCardsData.min) || 0
-    const cardsMaxValue = useSelector<AppRootStateType, number | undefined>(state => state.cards.requestCardsData.max) || 0
+    const cardsMinValue = useSelector<AppRootStateType, number>(state => state.cards.requestCardsData.min)
+    const cardsMaxValue = useSelector<AppRootStateType, number>(state => state.cards.requestCardsData.max)
 
     const dispatch = useDispatch()
 
     // packs
     let minSortValue = packsMinValue
     let maxSortValue = packsMaxValue
-    let minCount = packsMinCardsCount
-    let maxCount = packsMaxCardsCount
+    let minCount = packsMinCardsCount ? packsMinCardsCount : 0
+    let maxCount = packsMaxCardsCount ? packsMaxCardsCount : 0
 
     // cards
     if (!props.packs) {
         minSortValue = cardsMinValue
         maxSortValue = cardsMaxValue
-        minCount = Math.floor(cardsMinGrade)
-        maxCount = Math.ceil(cardsMaxGrade)
-        console.log('cards: ', cardsMinValue, cardsMaxValue, cardsMinGrade, cardsMaxGrade)
+        minCount = Math.floor(cardsMinGrade ? cardsMinGrade : 0)
+        maxCount = Math.ceil(cardsMaxGrade ? cardsMaxGrade : 0)
     }
 
     if (maxSortValue === 0) {
@@ -70,7 +70,7 @@ export function DoubleRangeSelector(props: PropsType) {
             sortFlag = true
         }
         if (sortFlag) {
-            dispatch(setRangeSearchAC(minCount, maxCount))
+            dispatch(setPacksRangeSearchAC(minCount, maxCount))
         }
     }, [minCount, maxCount])
 
@@ -100,7 +100,11 @@ export function DoubleRangeSelector(props: PropsType) {
             if (maxRangeValue === 0) {
                 setMaxRangeValue(maxCount)
             }
-            dispatch(setRangeSearchAC(minRangeValue, maxRangeValue))
+            if (props.packs) {
+                dispatch(setPacksRangeSearchAC(minRangeValue, maxRangeValue))
+            } else {
+                dispatch(setCardsRangeSearchAC(minRangeValue, maxRangeValue))
+            }
         }
     }
 

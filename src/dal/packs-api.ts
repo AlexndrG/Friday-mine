@@ -50,13 +50,13 @@ export type NewPackType = {
 
 
 export type PacksRequestType = {
-    packName?: string
-    min?: number
-    max?: number
-    sortPacks?: string
-    page?: number
-    pageCount?: number
-    user_id?: string
+    packName: string
+    min: number
+    max: number
+    sortPacks: string
+    page: number
+    pageCount: number
+    user_id: string
 }
 
 export type PackType = {

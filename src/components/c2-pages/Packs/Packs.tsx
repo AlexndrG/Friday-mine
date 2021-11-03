@@ -63,7 +63,7 @@ export function Packs(props: PropsType) {
                 }
             </div>
 
-            <div className={s.form}>
+            <div className={s.form} aria-disabled={props.isBusy}>
 
                 <div className={s.headBlocks}>
                     <div className={s.headBlockLeft}>
@@ -77,6 +77,7 @@ export function Packs(props: PropsType) {
 
                 <TableLinePack
                     head={true}
+                    isBusy={props.isBusy}
                     nameFieldName={'Name'}
                     nameFieldLink={''}
                     nameFieldButtons={sortButtons('name')}
@@ -101,6 +102,7 @@ export function Packs(props: PropsType) {
                         <TableLinePack
                             key={c._id}
                             head={false}
+                            isBusy={props.isBusy}
                             nameFieldName={c.name}
                             nameFieldLink={c._id}
                             nameFieldButtons={[]}
