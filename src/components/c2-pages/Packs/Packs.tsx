@@ -8,7 +8,7 @@ import {PerPage} from '../../PerPage/PerPage';
 import {MyPacksCheckBox} from '../../MyPacksCheckBox/MyPacksCheckBox';
 import {Paginator} from '../../Paginator/Paginator';
 import {FieldSearch} from '../../FieldSearch/FieldSearch';
-import {DoubleRangeCardsCount} from '../../DoubleRangeCardsCount/DoubleRangeCardsCount';
+import {DoubleRangeSelector} from '../../DoubleRangeSelector/DoubleRangeSelector';
 
 type PropsType = {
     userId: string
@@ -70,7 +70,7 @@ export function Packs(props: PropsType) {
                         <FieldSearch searchField={'PackName'} nameText={'Name search:'}/>
                     </div>
                     <div className={s.headBlockRight}>
-                        <DoubleRangeCardsCount/>
+                        <DoubleRangeSelector packs={true} nameText={'Cards count:'}/>
                     </div>
                 </div>
 

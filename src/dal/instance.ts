@@ -1,4 +1,4 @@
-﻿import axios from 'axios';
+import axios from 'axios';
 
 // Test mode
 // const baseURL = 'http://localhost:7542/2.0/'

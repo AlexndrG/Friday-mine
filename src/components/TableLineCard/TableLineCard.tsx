@@ -31,6 +31,7 @@ export function TableLineCard(props: PropsType) {
 
     return (
         <table style={tableStyle}>
+            <tbody>
             <tr>
                 <td width={'20%'} style={{...cellStyle, textAlign: props.head ? 'center' : 'left'}}>
                     {props.questionField}
@@ -53,6 +54,7 @@ export function TableLineCard(props: PropsType) {
                     {props.buttonsFieldButtons}
                 </td>
             </tr>
+            </tbody>
         </table>
     )
 }

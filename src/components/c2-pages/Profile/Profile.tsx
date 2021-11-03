@@ -50,6 +50,7 @@ export function Profile(props: PropsType) {
                         className={s.photo}
                         src={props.ifImgError || props.avatar || avatarDefault}
                         onError={props.setIfImgErrorHandler}
+                        alt={'Avatar'}
                     />
                 </div>
 

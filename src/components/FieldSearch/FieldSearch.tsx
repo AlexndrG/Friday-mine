@@ -48,7 +48,7 @@ export function FieldSearch(props: PropsType) {
             {props.nameText} &nbsp;
             <SuperInputText
                 value={search}
-                size={30}
+                size={20}
                 onChange={(e) => setSearch(e.currentTarget.value)}
                 disabled={isBusy}
             />

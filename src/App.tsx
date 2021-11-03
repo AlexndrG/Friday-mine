@@ -6,8 +6,6 @@ import {AppRootStateType} from './bll/store';
 import {useDispatch, useSelector} from 'react-redux';
 import {Loader} from './components/Loader/Loader';
 import {initializeTC} from './bll/appReducer';
-import {Redirect} from 'react-router-dom';
-
 
 export function App() {
     const isInitialized = useSelector<AppRootStateType, boolean>(state => state.app.isInitialized)

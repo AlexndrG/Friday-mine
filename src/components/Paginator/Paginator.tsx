@@ -73,6 +73,7 @@ export function Paginator(props: PropsType) {
                 {
                     pageButtons.map((b, i) =>
                         <SuperButton
+                            key={i}
                             title={pageButtonsTitle[i]}
                             onClick={() => dispatch(pageFunctions[i])}
                             disabled={isBusy || pageDisables[i]()}

@@ -7,6 +7,7 @@ import {TableLineCard} from '../../TableLineCard/TableLineCard';
 import {PerPage} from '../../PerPage/PerPage';
 import {Paginator} from '../../Paginator/Paginator';
 import {FieldSearch} from '../../FieldSearch/FieldSearch';
+import {DoubleRangeSelector} from '../../DoubleRangeSelector/DoubleRangeSelector';
 
 type PropsType = {
     userId: string
@@ -42,7 +43,7 @@ export function Cards(props: PropsType) {
                         <FieldSearch searchField={'CardAnswer'} nameText={'Answer search:'}/>
                     </div>
                     <div className={s.headBlockRight}>
-                        {/*<DoubleRangeCardsCount/>*/}
+                        <DoubleRangeSelector packs={false} nameText={'Grades:'}/>
                     </div>
                 </div>
 

@@ -23,8 +23,9 @@ export function PerPage(props: PropsType) {
     return (
         <div className={s.form}>
             <div className={s.itemText}>{props.nameText}</div>
-            {perPageArr.map(p =>
+            {perPageArr.map((p,i) =>
                 <div
+                    key={i}
                     className={s.item + ' ' + (p === activeCount ? s.itemActive : '')}
                     onClick={() => {
                         if (!isBusy && p !== activeCount) {
