@@ -128,11 +128,11 @@ export const getPacksTC = () => (dispatch: Dispatch, getState: () => AppRootStat
 }
 
 // export const addPackTC = () => (dispatch: Dispatch) => {
-export const addPackTC = () => (dispatch: Dispatch<any>) => {
+export const addPackTC = (name:string) => (dispatch: Dispatch<any>) => {
     dispatch(setAppErrorAC(''))
     dispatch(setAppBusyAC(true))
 
-    packsAPI.addPack({name: 'SuperPuperName'})
+    packsAPI.addPack({name})
         .then(response => {
             dispatch(getPacksTC())
         })
@@ -162,11 +162,11 @@ export const delPackTC = (id: string) => (dispatch: Dispatch<any>) => {
 }
 
 // export const updatePackTC = () => (dispatch: Dispatch) => {
-export const updatePackTC = (_id: string) => (dispatch: Dispatch<any>) => {
+export const updatePackTC = (_id: string, name: string) => (dispatch: Dispatch<any>) => {
     dispatch(setAppErrorAC(''))
     dispatch(setAppBusyAC(true))
 
-    packsAPI.updatePack({_id, name: 'Updated SuperPuperName!'})
+    packsAPI.updatePack({_id, name})
         .then(response => {
             dispatch(getPacksTC())
         })

@@ -1,5 +1,4 @@
 import React, {ReactNode, useEffect, useState} from 'react';
-import s from './PacksContainer.module.css'
 import {Packs} from './Packs';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../../bll/store';
@@ -8,8 +7,8 @@ import {GetPacksResponseType, PacksRequestType} from '../../../dal/packs-api';
 import {setAppErrorAC} from '../../../bll/appReducer';
 import {Redirect} from 'react-router-dom';
 import {ModalWindow} from '../../ModalWindow/ModalWindow';
-import SuperInputText from '../../c1-common/c1-SuperInputText/SuperInputText';
-import SuperButton from '../../c1-common/c2-SuperButton/SuperButton';
+import { PackAddUpdateModal } from '../Packs-modals/PackAddUpdateModal';
+import {PackDeleteModal} from '../Packs-modals/PackDeleteModal';
 
 export function PacksContainer() {
     const isLogined = useSelector<AppRootStateType, boolean>(state => state.app.isLogined)
@@ -41,25 +40,43 @@ export function PacksContainer() {
 
     const addPress = () => {
         // dispatch(addPackTC())
-
         setModalContent(
-            <>
-                Pack name: <SuperInputText/>
-                <div className={s.modalCenter}>
-                    <SuperButton>OK</SuperButton>
-                    <SuperButton>Cancel</SuperButton>
-                </div>
-            </>
+            <PackAddUpdateModal
+                add={true}
+                id={''}
+                name={''}
+                setActive={setModalActive}
+                dispatchFunction={addPackTC}
+            />
         )
         setModalActive(true)
     }
 
-    const delPress = (id: string) => {
-        dispatch(delPackTC(id))
+    const delPress = (id: string, name: string) => {
+        // dispatch(delPackTC(id))
+        setModalContent(
+            <PackDeleteModal
+                id={id}
+                name={name}
+                setActive={setModalActive}
+                dispatchFunction={delPackTC}
+            />
+        )
+        setModalActive(true)
     }
 
-    const updatePress = (id: string) => {
-        dispatch(updatePackTC(id))
+    const updatePress = (id: string, name: string) => {
+        // dispatch(updatePackTC(id))
+        setModalContent(
+            <PackAddUpdateModal
+                add={false}
+                id={id}
+                name={name}
+                setActive={setModalActive}
+                dispatchFunction={updatePackTC}
+            />
+        )
+        setModalActive(true)
     }
 
     if (!isLogined) {
@@ -80,12 +97,7 @@ export function PacksContainer() {
                 updatePress={updatePress}
             />
 
-            <ModalWindow active={modalActive} setActive={setModalActive} modalContent={modalContent}/>
-
-            {/*<ModalWindow active={modalActive} setActive={setModalActive}>*/}
-            {/*    {modalContent}*/}
-            {/*</ModalWindow>*/}
-
+            <ModalWindow active={modalActive} modalContent={modalContent}/>
         </>
     )
 }

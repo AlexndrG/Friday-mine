@@ -18,8 +18,8 @@ type PropsType = {
     sortPress: (sortString: string) => void
     sortName: string
     addPress: () => void
-    delPress: (id: string) => void
-    updatePress: (id: string) => void
+    delPress: (id: string, name: string) => void
+    updatePress: (id: string, name: string) => void
 }
 
 export function Packs(props: PropsType) {
@@ -113,12 +113,12 @@ export function Packs(props: PropsType) {
                                 <div>
                                     <SuperButton
                                         className={s.buttonActions}
-                                        onClick={() => props.delPress(c._id)}
+                                        onClick={() => props.delPress(c._id, c.name)}
                                         disabled={props.isBusy || c.user_id !== props.userId}
                                     >Del</SuperButton>
                                     <SuperButton
                                         className={s.buttonActions}
-                                        onClick={() => props.updatePress(c._id)}
+                                        onClick={() => props.updatePress(c._id, c.name)}
                                         disabled={props.isBusy || c.user_id !== props.userId}
                                     >Update</SuperButton>
                                     <SuperButton
