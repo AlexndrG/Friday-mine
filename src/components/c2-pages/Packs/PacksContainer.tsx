@@ -1,4 +1,5 @@
-import React, {ReactChildren, ReactElement, ReactNode, useEffect, useState} from 'react';
+import React, {ReactNode, useEffect, useState} from 'react';
+import s from './PacksContainer.module.css'
 import {Packs} from './Packs';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../../bll/store';
@@ -7,6 +8,8 @@ import {GetPacksResponseType, PacksRequestType} from '../../../dal/packs-api';
 import {setAppErrorAC} from '../../../bll/appReducer';
 import {Redirect} from 'react-router-dom';
 import {ModalWindow} from '../../ModalWindow/ModalWindow';
+import SuperInputText from '../../c1-common/c1-SuperInputText/SuperInputText';
+import SuperButton from '../../c1-common/c2-SuperButton/SuperButton';
 
 export function PacksContainer() {
     const isLogined = useSelector<AppRootStateType, boolean>(state => state.app.isLogined)
@@ -39,7 +42,15 @@ export function PacksContainer() {
     const addPress = () => {
         // dispatch(addPackTC())
 
-        setModalContent(<div><button>123</button><div>zxcf</div></div>)
+        setModalContent(
+            <>
+                Pack name: <SuperInputText/>
+                <div className={s.modalCenter}>
+                    <SuperButton>OK</SuperButton>
+                    <SuperButton>Cancel</SuperButton>
+                </div>
+            </>
+        )
         setModalActive(true)
     }
 
