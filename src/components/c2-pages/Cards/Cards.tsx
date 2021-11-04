@@ -17,8 +17,8 @@ type PropsType = {
     sortPress: (sortString: string) => void
     sortName: string
     addPress: () => void
-    delPress: (id: string) => void
-    updatePress: (id: string) => void
+    delPress: (id: string, question: string) => void
+    updatePress: (id: string, question: string, answer: string) => void
 }
 
 export function Cards(props: PropsType) {
@@ -117,12 +117,12 @@ export function Cards(props: PropsType) {
                                 <div>
                                     <SuperButton
                                         className={s.buttonActions}
-                                        onClick={() => props.delPress(c._id)}
+                                        onClick={() => props.delPress(c._id, c.question)}
                                         disabled={props.isBusy || props.cardsData.packUserId !== props.userId}
                                     >Del</SuperButton>
                                     <SuperButton
                                         className={s.buttonActions}
-                                        onClick={() => props.updatePress(c._id)}
+                                        onClick={() => props.updatePress(c._id, c.question, c.answer)}
                                         disabled={props.isBusy || props.cardsData.packUserId !== props.userId}
                                     >Update</SuperButton>
                                 </div>

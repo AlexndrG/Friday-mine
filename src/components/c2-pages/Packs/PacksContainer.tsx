@@ -7,7 +7,7 @@ import {GetPacksResponseType, PacksRequestType} from '../../../dal/packs-api';
 import {setAppErrorAC} from '../../../bll/appReducer';
 import {Redirect} from 'react-router-dom';
 import {ModalWindow} from '../../ModalWindow/ModalWindow';
-import { PackAddUpdateModal } from '../Packs-modals/PackAddUpdateModal';
+import {PackAddUpdateModal} from '../Packs-modals/PackAddUpdateModal';
 import {PackDeleteModal} from '../Packs-modals/PackDeleteModal';
 
 export function PacksContainer() {
@@ -22,6 +22,8 @@ export function PacksContainer() {
 
     const [modalActive, setModalActive] = useState(false)
     const [modalContent, setModalContent] = useState<ReactNode>(<></>)
+
+    const [learn, setLearn] = useState('')
 
     useEffect(() => {
         if (isLogined) {
@@ -79,9 +81,19 @@ export function PacksContainer() {
         setModalActive(true)
     }
 
+    const learnPress = (id: string) => {
+        setLearn(id)
+    }
+
+
     if (!isLogined) {
         return <Redirect to={'/login'}/>
     }
+
+    if (learn) {
+        return <Redirect to={'/learn/' + learn}/>
+    }
+
 
     return (
         <>
@@ -95,6 +107,7 @@ export function PacksContainer() {
                 addPress={addPress}
                 delPress={delPress}
                 updatePress={updatePress}
+                learnPress={learnPress}
             />
 
             <ModalWindow active={modalActive} modalContent={modalContent}/>

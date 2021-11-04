@@ -3,7 +3,7 @@ import {cardsAPI, CardsRequestType, GetCardsResponseType} from '../dal/cards-api
 import {AppRootStateType} from './store';
 import {setAppBusyAC, setAppErrorAC} from './appReducer';
 
-const initRequestCardsData = {
+export const initRequestCardsData = {
     cardAnswer: '',
     cardQuestion: '',
     cardsPack_id: '',
@@ -126,11 +126,11 @@ export const getCardsTC = (cardsPack_id: string) => (dispatch: Dispatch, getStat
 }
 
 // export const addCardTC = () => (dispatch: Dispatch) => {
-export const addCardTC = (cardsPack_id: string) => (dispatch: Dispatch<any>) => {
+export const addCardTC = (cardsPack_id: string, question: string, answer: string) => (dispatch: Dispatch<any>) => {
     dispatch(setAppErrorAC(''))
     dispatch(setAppBusyAC(true))
 
-    cardsAPI.addCard({cardsPack_id, question: 'SuperPuperQuestion', answer: 'SuperPuperAnswer'})
+    cardsAPI.addCard({cardsPack_id, question, answer})
         .then(response => {
             dispatch(getCardsTC(cardsPack_id))
         })
@@ -160,11 +160,11 @@ export const delCardTC = (cardsPack_id: string, id: string) => (dispatch: Dispat
 }
 
 // export const updateCardTC = () => (dispatch: Dispatch) => {
-export const updateCardTC = (cardsPack_id: string, _id: string) => (dispatch: Dispatch<any>) => {
+export const updateCardTC = (cardsPack_id: string, _id: string, question: string, answer: string) => (dispatch: Dispatch<any>) => {
     dispatch(setAppErrorAC(''))
     dispatch(setAppBusyAC(true))
 
-    cardsAPI.updateCard({_id,  question: 'Updated SuperPuperQuestion', answer: 'Updated SuperPuperAnswer'})
+    cardsAPI.updateCard({_id, question, answer})
         .then(response => {
             dispatch(getCardsTC(cardsPack_id))
         })

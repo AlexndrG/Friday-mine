@@ -3,17 +3,18 @@ import {setAppLoginAC, setAppBusyAC, setAppErrorAC} from './appReducer';
 import {GetPacksResponseType, packsAPI, PacksRequestType} from '../dal/packs-api';
 import {AppRootStateType} from './store';
 
-const initialState = {
-    requestPacksData: {
-        packName: '',
-        min: 0,
-        max: 0,
-        sortPacks: '',
-        page: 1,
-        pageCount: 10,
-        user_id: '',
-    } as PacksRequestType,
+const initRequestPacksData = {
+    packName: '',
+    min: 0,
+    max: 0,
+    sortPacks: '',
+    page: 1,
+    pageCount: 10,
+    user_id: '',
+}
 
+const initialState = {
+    requestPacksData: initRequestPacksData as PacksRequestType,
     packsData: {} as GetPacksResponseType,
 }
 type StateType = typeof initialState
@@ -26,6 +27,13 @@ export function packsReducer(state: StateType = initialState, action: ActionType
                 ...state,
                 packsData: {...action.packsData},
 
+            }
+
+        case 'PACKS/SET-INIT-PACKS-DATA':
+            return {
+                ...state,
+                requestPacksData: initRequestPacksData,
+                packsData: {} as GetPacksResponseType,
             }
 
         case 'PACKS/SET-PACKS-PER-PAGE':
@@ -103,6 +111,7 @@ export function packsReducer(state: StateType = initialState, action: ActionType
 
 
 export const setPacksDataAC = (packsData: GetPacksResponseType) => ({type: 'PACKS/SET-PACKS-DATA', packsData} as const)
+export const setInitPacksDataAC = () => ({type: 'PACKS/SET-INIT-PACKS-DATA'} as const)
 export const setPacksPerPageAC = (packsCount: number) => ({type: 'PACKS/SET-PACKS-PER-PAGE', packsCount} as const)
 export const setMyPacksCheckBoxAC = (id: string) => ({type: 'PACKS/SET-MY-PACKS-CHECKBOX', id} as const)
 export const setCurrentPackPageAC = (pageNumber: number) => ({type: 'PACKS/SET-CURRENT-PAGE', pageNumber} as const)
@@ -183,6 +192,7 @@ type ActionType =
     | ReturnType<typeof setAppLoginAC>
 
     | ReturnType<typeof setPacksDataAC>
+    | ReturnType<typeof setInitPacksDataAC>
     | ReturnType<typeof setPacksPerPageAC>
     | ReturnType<typeof setMyPacksCheckBoxAC>
     | ReturnType<typeof setCurrentPackPageAC>

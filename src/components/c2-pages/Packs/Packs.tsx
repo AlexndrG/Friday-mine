@@ -20,6 +20,7 @@ type PropsType = {
     addPress: () => void
     delPress: (id: string, name: string) => void
     updatePress: (id: string, name: string) => void
+    learnPress: (id: string) => void
 }
 
 export function Packs(props: PropsType) {
@@ -122,7 +123,7 @@ export function Packs(props: PropsType) {
                                         disabled={props.isBusy || c.user_id !== props.userId}
                                     >Update</SuperButton>
                                     <SuperButton
-                                        // onClick={}
+                                        onClick={() => props.learnPress(c._id)}
                                         disabled={props.isBusy}
                                     >Learn</SuperButton>
                                 </div>

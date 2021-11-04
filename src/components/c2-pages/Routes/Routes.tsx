@@ -10,16 +10,9 @@ import {PacksContainer} from '../Packs/PacksContainer';
 import {CardsContainer} from '../Cards/CardsContainer';
 import {useDispatch} from 'react-redux';
 import {setInitCardsDataAC} from '../../../bll/cardsReducer';
-
-/*
-логинизация
-регистрация
-профайл
-404 (можно застилизовать заранее)
-восстановление пароля
-ввод нового пароля
-тестовая - отобразить/продемонстрировать все SuperКомпоненты
- */
+import {setInitPacksDataAC} from '../../../bll/packsReducer';
+import {LearnContainer} from '../Learn/LearnContainer';
+import {clearLearnDataAC} from '../../../bll/learnReducer';
 
 export const PATH = {
     LOGIN: '/login',
@@ -28,7 +21,8 @@ export const PATH = {
     PASSWORD_RESTORE: '/pwd-restore',
     PASSWORD_NEW: '/pwd-new/:token',
     PACKS: '/packs',
-    CARDS: '/cards/:cardsPackId'
+    CARDS: '/cards/:cardsPackId',
+    LEARN: '/learn/:cardsPackId',
 }
 
 
@@ -40,7 +34,12 @@ export function Routes() {
             <Switch>
                 <Route path={'/'} exact render={() => <ProfileContainer/>}/>
 
-                <Route path={PATH.LOGIN} render={() => <LoginContainer/>}/>
+                {/*<Route path={PATH.LOGIN} render={() => <LoginContainer/>}/>*/}
+                <Route path={PATH.LOGIN} render={() => {
+                    dispatch(setInitPacksDataAC())
+                    return <LoginContainer/>
+                }}/>
+
                 <Route path={PATH.REGISTER} render={() => <RegisterContainer/>}/>
                 <Route path={PATH.PROFILE} render={() => <ProfileContainer/>}/>
                 <Route path={PATH.PASSWORD_RESTORE} render={() => <PwdRestoreContainer/>}/>
@@ -51,6 +50,12 @@ export function Routes() {
                 <Route path={PATH.CARDS} render={() => {
                     dispatch(setInitCardsDataAC())
                     return <CardsContainer/>
+                }}/>
+
+                {/*<Route path={PATH.LEARN} render={() => <LearnContainer/>}/>*/}
+                <Route path={PATH.LEARN} render={() => {
+                    dispatch(clearLearnDataAC())
+                    return <LearnContainer/>
                 }}/>
 
                 <Route render={() => <Error404/>}/>
