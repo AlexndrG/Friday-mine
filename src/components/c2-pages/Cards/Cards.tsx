@@ -36,10 +36,12 @@ export function Cards(props: PropsType) {
     }
 
     const sortButtons = (sortParameter: string) => {
-        return [
-            sortButton('1' + sortParameter, '<', 'Sort Ascending'),
-            sortButton('0' + sortParameter, '>', 'Sort Descending'),
-        ]
+        return (
+            <>
+                {sortButton('1' + sortParameter, '<', 'Sort Ascending')}
+                {sortButton('0' + sortParameter, '>', 'Sort Descending')}
+            </>
+        )
     }
 
     return (
@@ -103,27 +105,27 @@ export function Cards(props: PropsType) {
                             key={c._id}
                             head={false}
                             questionField={c.question}
-                            questionFieldButtons={[]}
+                            questionFieldButtons={<></>}
                             answerField={c.answer}
-                            answerFieldButtons={[]}
+                            answerFieldButtons={<></>}
                             gradeField={'' + c.grade}
-                            gradeFieldButtons={[]}
+                            gradeFieldButtons={<></>}
                             updatedField={c.updated.substr(0, 10) + ' ' + c.updated.substr(11, 8)}
-                            updatedFieldButtons={[]}
+                            updatedFieldButtons={<></>}
                             buttonsFieldName={''}
                             buttonsFieldButtons={
-                                [
+                                <div>
                                     <SuperButton
                                         className={s.buttonActions}
                                         onClick={() => props.delPress(c._id)}
                                         disabled={props.isBusy || props.cardsData.packUserId !== props.userId}
-                                    >Del</SuperButton>,
+                                    >Del</SuperButton>
                                     <SuperButton
                                         className={s.buttonActions}
                                         onClick={() => props.updatePress(c._id)}
                                         disabled={props.isBusy || props.cardsData.packUserId !== props.userId}
-                                    >Update</SuperButton>,
-                                ]
+                                    >Update</SuperButton>
+                                </div>
                             }
                         />
                     )

@@ -8,13 +8,13 @@ type PropsType = {
     isBusy: boolean
     nameFieldName: string
     nameFieldLink: string
-    nameFieldButtons: ReactNode[]
+    nameFieldButtons: ReactNode
     cardsCountField: string
-    cardsCountFieldButtons: ReactNode[]
+    cardsCountFieldButtons: ReactNode
     updatedField: string
-    updatedFieldButtons: ReactNode[]
+    updatedFieldButtons: ReactNode
     buttonsFieldName: string
-    buttonsFieldButtons: ReactNode[]
+    buttonsFieldButtons: ReactNode
 }
 
 export function TableLinePack(props: PropsType) {

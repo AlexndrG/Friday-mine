@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {ReactChildren, ReactElement, ReactNode, useEffect, useState} from 'react';
 import {Packs} from './Packs';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../../bll/store';
@@ -6,6 +6,7 @@ import {addPackTC, delPackTC, getPacksTC, setSortPacksAC, updatePackTC} from '..
 import {GetPacksResponseType, PacksRequestType} from '../../../dal/packs-api';
 import {setAppErrorAC} from '../../../bll/appReducer';
 import {Redirect} from 'react-router-dom';
+import {ModalWindow} from '../../ModalWindow/ModalWindow';
 
 export function PacksContainer() {
     const isLogined = useSelector<AppRootStateType, boolean>(state => state.app.isLogined)
@@ -16,6 +17,9 @@ export function PacksContainer() {
     const isBusy = useSelector<AppRootStateType, boolean>(state => state.app.isBusy)
     const error = useSelector<AppRootStateType, string>(state => state.app.error)
     const dispatch = useDispatch()
+
+    const [modalActive, setModalActive] = useState(false)
+    const [modalContent, setModalContent] = useState<ReactNode>(<></>)
 
     useEffect(() => {
         if (isLogined) {
@@ -33,7 +37,10 @@ export function PacksContainer() {
     }
 
     const addPress = () => {
-        dispatch(addPackTC())
+        // dispatch(addPackTC())
+
+        setModalContent(<div><button>123</button><div>zxcf</div></div>)
+        setModalActive(true)
     }
 
     const delPress = (id: string) => {
@@ -61,6 +68,13 @@ export function PacksContainer() {
                 delPress={delPress}
                 updatePress={updatePress}
             />
+
+            <ModalWindow active={modalActive} setActive={setModalActive} modalContent={modalContent}/>
+
+            {/*<ModalWindow active={modalActive} setActive={setModalActive}>*/}
+            {/*    {modalContent}*/}
+            {/*</ModalWindow>*/}
+
         </>
     )
 }

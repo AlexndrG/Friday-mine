@@ -4,15 +4,15 @@ import s from './TableLineCard.module.css';
 type PropsType = {
     head: boolean
     questionField: string
-    questionFieldButtons: ReactNode[]
+    questionFieldButtons: ReactNode
     answerField: string
-    answerFieldButtons: ReactNode[]
+    answerFieldButtons: ReactNode
     gradeField: string
-    gradeFieldButtons: ReactNode[]
+    gradeFieldButtons: ReactNode
     updatedField: string
-    updatedFieldButtons: ReactNode[]
+    updatedFieldButtons: ReactNode
     buttonsFieldName: string
-    buttonsFieldButtons: ReactNode[]
+    buttonsFieldButtons: ReactNode
 }
 
 export function TableLineCard(props: PropsType) {

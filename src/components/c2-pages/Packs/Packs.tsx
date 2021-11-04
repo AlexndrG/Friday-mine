@@ -37,12 +37,12 @@ export function Packs(props: PropsType) {
     }
 
     const sortButtons = (sortParameter: string) => {
-        return [
-            // sortButton('1' + sortParameter, '?'),
-            // sortButton('0' + sortParameter, String.fromCharCode(191)),
-            sortButton('1' + sortParameter, '<', 'Sort Ascending'),
-            sortButton('0' + sortParameter, '>', 'Sort Descending'),
-        ]
+        return (
+            <>
+                {sortButton('1' + sortParameter, '<', 'Sort Ascending')}
+                {sortButton('0' + sortParameter, '>', 'Sort Descending')}
+            </>
+        )
     }
 
     return (
@@ -87,12 +87,10 @@ export function Packs(props: PropsType) {
                     updatedFieldButtons={sortButtons('updated')}
                     buttonsFieldName={'Actions: '}
                     buttonsFieldButtons={
-                        [
-                            <SuperButton
-                                onClick={props.addPress}
-                                disabled={props.isBusy}
-                            >Add</SuperButton>,
-                        ]
+                        <SuperButton
+                            onClick={props.addPress}
+                            disabled={props.isBusy}
+                        >Add</SuperButton>
                     }
                 />
 
@@ -105,29 +103,29 @@ export function Packs(props: PropsType) {
                             isBusy={props.isBusy}
                             nameFieldName={c.name}
                             nameFieldLink={c._id}
-                            nameFieldButtons={[]}
+                            nameFieldButtons={<></>}
                             cardsCountField={'' + c.cardsCount}
                             cardsCountFieldButtons={[]}
                             updatedField={c.updated.substr(0, 10) + ' ' + c.updated.substr(11, 8)}
-                            updatedFieldButtons={[]}
+                            updatedFieldButtons={<></>}
                             buttonsFieldName={''}
                             buttonsFieldButtons={
-                                [
+                                <div>
                                     <SuperButton
                                         className={s.buttonActions}
                                         onClick={() => props.delPress(c._id)}
                                         disabled={props.isBusy || c.user_id !== props.userId}
-                                    >Del</SuperButton>,
+                                    >Del</SuperButton>
                                     <SuperButton
                                         className={s.buttonActions}
                                         onClick={() => props.updatePress(c._id)}
                                         disabled={props.isBusy || c.user_id !== props.userId}
-                                    >Update</SuperButton>,
+                                    >Update</SuperButton>
                                     <SuperButton
                                         // onClick={}
                                         disabled={props.isBusy}
-                                    >Learn</SuperButton>,
-                                ]
+                                    >Learn</SuperButton>
+                                </div>
                             }
                         />
                     )
@@ -136,7 +134,7 @@ export function Packs(props: PropsType) {
                 <div className={s.footBlocks}>
                     <div className={s.footBlockLeft}>
                         <MyPacksCheckBox/>
-                        <PerPage packs={true} nameText={'Packs per page:'} />
+                        <PerPage packs={true} nameText={'Packs per page:'}/>
                     </div>
                     <div className={s.footBlockRight}>
                         <Paginator packs={true}/>
