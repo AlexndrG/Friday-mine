@@ -1,0 +1,19 @@
+.main {
+    width: 90%;
+    min-height: 1%;
+    text-align: center;
+}
+
+.form {
+    display: inline-block;
+    width: 90%;
+    word-break: break-word;
+    border: 1px solid green;
+    padding: 10px;
+    margin: 0 20px;
+}
+
+.closed {
+    background: lightcoral;
+    color: lightcoral;
+}

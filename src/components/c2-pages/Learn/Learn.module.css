@@ -7,18 +7,40 @@
 }
 
 .form {
-    display: inline-block;
+    /*display: inline-block;*/
+    display: flex;
+    flex-direction: column;
     width: 90%;
-    word-break: break-all;
+    word-break: break-word;
     border: 1px solid blue;
     padding: 10px;
     margin: 0 20px;
 }
 
-.item {
-    display: inline-block;
-    box-sizing: border-box;
-    margin: 10px 0;
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 10px;
+    /*border: 1px dashed green;*/
+}
+
+.grades {
+    display: flex;
+    justify-content: space-around;
+    /*border: 1px dashed blue;*/
+}
+
+.next {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    /*border: 1px dashed brown;*/
+}
+
+.cards {
+    display: flex;
+    justify-content: space-around;
+    /*border: 1px dashed red;*/
 }
 
 .error {

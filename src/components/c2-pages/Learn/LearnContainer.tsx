@@ -4,12 +4,14 @@ import {AppRootStateType} from '../../../bll/store';
 import {Redirect, useParams} from 'react-router-dom';
 import {Learn} from './Learn';
 import {setAppErrorAC} from '../../../bll/appReducer';
-import {getLearnCardsTC} from '../../../bll/learnReducer';
+import {CardInfo, getLearnCardsTC, getRandomLearnCardAC} from '../../../bll/learnReducer';
 
 export function LearnContainer() {
     const isLogined = useSelector<AppRootStateType, boolean>(state => state.app.isLogined)
     const isBusy = useSelector<AppRootStateType, boolean>(state => state.app.isBusy)
     const error = useSelector<AppRootStateType, string>(state => state.app.error)
+    const isLearnDataLoaded = useSelector<AppRootStateType, boolean>(state => state.learn.learnDataLoaded)
+    const currentLearnCard = useSelector<AppRootStateType, CardInfo>(state => state.learn.currentLearnCard)
 
     const {cardsPackId} = useParams<{ cardsPackId: string }>()
 
@@ -25,6 +27,12 @@ export function LearnContainer() {
         }
     }, [])
 
+    useEffect(() => {
+        if (isLearnDataLoaded) {
+            dispatch(getRandomLearnCardAC())
+        }
+    }, [isLearnDataLoaded])
+
 
     if (!isLogined) {
         return <Redirect to={'/login'}/>
@@ -35,6 +43,7 @@ export function LearnContainer() {
             <Learn
                 isBusy={isBusy}
                 error={error}
+                currentLearnCard={currentLearnCard}
             />
         </>
     )
