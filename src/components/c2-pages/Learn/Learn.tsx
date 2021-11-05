@@ -19,6 +19,12 @@ export function Learn(props: PropsType) {
 
     const [closedAnswer, setClosedAnswer] = useState(true)
 
+    const nextPress = () => {
+        setClosedAnswer(true)
+        dispatch(getRandomLearnCardAC())
+    }
+
+
     return (
         <div className={s.main}>
             <div className={s.titleProgressError}>
@@ -46,6 +52,12 @@ export function Learn(props: PropsType) {
                             disabled={props.isBusy || !closedAnswer}>
                             Show answer
                         </SuperButton>
+
+                        <SuperButton
+                            onClick={nextPress}
+                            disabled={props.isBusy}>
+                            Next card
+                        </SuperButton>
                     </div>
 
                     <div className={s.grades}>
@@ -55,6 +67,7 @@ export function Learn(props: PropsType) {
                                     key={g}
                                     onClick={() => {
                                         dispatch(setGradeTC(i + 1, props.currentLearnCard.cardId))
+                                        nextPress()
                                     }}
                                     disabled={props.isBusy || closedAnswer}>
                                     {g}
@@ -63,24 +76,12 @@ export function Learn(props: PropsType) {
                         }
                     </div>
 
-                    <div className={s.next}>
-                        <SuperButton
-                            onClick={() => {
-                                setClosedAnswer(true)
-                                dispatch(getRandomLearnCardAC())
-                            }}
-                            // disabled={props.isBusy || closedAnswer}
-                        >
-                            Next card
-                        </SuperButton>
-                    </div>
-
 
                     <div className={s.cards}>
                         <LearnCard
                             closed={false}
                             nameText={'Question:'}
-                            bodyText={props.currentLearnCard.question}
+                            bodyText={props.isBusy ? '' : props.currentLearnCard.question}
                         />
                         <LearnCard
                             closed={closedAnswer}

@@ -26,6 +26,7 @@ export function learnReducer(state: StateType = initialState, action: ActionType
                 ...state,
                 learnDataLoaded: false,
                 cards: [],
+                currentLearnCard: {} as CardInfo,
             }
 
         case 'LEARN/ADD-LEARN-DATA':

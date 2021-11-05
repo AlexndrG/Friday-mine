@@ -19,22 +19,24 @@
 
 .buttons {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     padding-bottom: 10px;
     /*border: 1px dashed green;*/
+}
+.buttons button {
+    padding: 10px;
+    margin: 0 10px;
 }
 
 .grades {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    padding-bottom: 25px;
     /*border: 1px dashed blue;*/
 }
-
-.next {
-    display: flex;
-    justify-content: space-around;
-    padding: 20px;
-    /*border: 1px dashed brown;*/
+.grades button {
+    padding: 10px;
+    margin: 0 10px;
 }
 
 .cards {
