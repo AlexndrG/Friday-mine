@@ -26,6 +26,7 @@ export function CardAddUpdateModal(props: PropsType) {
             <SuperInputText
                 value={questionValue}
                 onChange={e => setQuestionValue(e.currentTarget.value)}
+                autoFocus
             />
             <p/>
             Answer: &nbsp;

@@ -1,6 +1,5 @@
 .main {
-    width: 90%;
-    min-height: 1%;
+    width: 99%;
     text-align: center;
 }
 
@@ -10,7 +9,7 @@
     word-break: break-word;
     border: 1px solid green;
     padding: 10px;
-    margin: 0 20px;
+    margin: 5px;
 }
 
 .closed {

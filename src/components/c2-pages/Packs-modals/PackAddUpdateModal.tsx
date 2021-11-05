@@ -24,6 +24,7 @@ export function PackAddUpdateModal(props: PropsType) {
             <SuperInputText
                 value={value}
                 onChange={e => setValue(e.currentTarget.value)}
+                autoFocus
             />
             <p/>
             <div className={s.modalCenter}>

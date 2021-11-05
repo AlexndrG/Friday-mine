@@ -88,12 +88,10 @@ export function Cards(props: PropsType) {
                         updatedFieldButtons={sortButtons('updated')}
                         buttonsFieldName={'Actions: '}
                         buttonsFieldButtons={
-                            [
                                 <SuperButton
                                     onClick={props.addPress}
                                     disabled={props.isBusy || props.cardsData.packUserId !== props.userId}
-                                >Add</SuperButton>,
-                            ]
+                                >Add</SuperButton>
                         }
                     />
                 }

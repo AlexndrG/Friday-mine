@@ -45,21 +45,45 @@ export function learnReducer(state: StateType = initialState, action: ActionType
                 ]
             }
 
-        case 'LEARN/SORT-LEARN-CARDS':
-            const copyCards = state.cards.map(c => ({...c}))
-            copyCards.sort((a, b) => a.grade - b.grade)
+        case 'LEARN/LEARN-DATA-LOADED':
             return {
                 ...state,
-                cards: copyCards,
                 learnDataLoaded: true,
             }
 
+        // case 'LEARN/SORT-LEARN-CARDS':
+        //     const copyCards = state.cards.map(c => ({...c}))
+        //     copyCards.sort((a, b) => a.grade - b.grade)
+        //     return {
+        //         ...state,
+        //         cards: copyCards,
+        //         learnDataLoaded: true,
+        //     }
+
         case 'LEARN/GET-RANDOM-LEARN-CARD':
-            const randomLearnCardNumber = Math.trunc(Math.random() * state.cards.length)
+            const totalCount = state.cards.reduce((acc, el) => acc + (6 - el.grade) ** 3, 0)
+            const randomNumber = Math.trunc(Math.random() * totalCount)
+
+            let randomLearnCardNumber = 0
+            let tempCount = 0
+            for (let i=0; i<state.cards.length; i++) {
+                tempCount += (6 - state.cards[i].grade) ** 3
+                if (randomNumber <= tempCount) {
+                    randomLearnCardNumber = i
+                    break
+                }
+            }
+
             return {
                 ...state,
-                currentLearnCard: state.cards[randomLearnCardNumber],
+                currentLearnCard: {...state.cards[randomLearnCardNumber]},
             }
+        // const randomLearnCardNumber = Math.trunc(Math.random() * state.cards.length)
+        // return {
+        //     ...state,
+        //     currentLearnCard: state.cards[randomLearnCardNumber],
+        // }
+
 
         case 'LEARN/SET-NEW-GRADE':
             return {
@@ -76,7 +100,8 @@ export function learnReducer(state: StateType = initialState, action: ActionType
 
 export const clearLearnDataAC = () => ({type: 'LEARN/CLEAR-LEARN-DATA'} as const)
 export const addLearnDataAC = (cardsData: GetCardsResponseType) => ({type: 'LEARN/ADD-LEARN-DATA', cardsData} as const)
-export const sortLearnCardsAC = () => ({type: 'LEARN/SORT-LEARN-CARDS'} as const)
+export const setLearnDataLoadedAC = () => ({type: 'LEARN/LEARN-DATA-LOADED'} as const)
+// export const sortLearnCardsAC = () => ({type: 'LEARN/SORT-LEARN-CARDS'} as const)
 export const getRandomLearnCardAC = () => ({type: 'LEARN/GET-RANDOM-LEARN-CARD'} as const)
 export const setNewGradeAC = (cardId: string, newGrade: number) => ({
     type: 'LEARN/SET-NEW-GRADE',
@@ -95,9 +120,9 @@ export const getLearnCardsTC = (cardsPack_id: string, pageToLoad: number, loaded
             if (pageToLoad === loadedPage) {
                 dispatch(addLearnDataAC(response.data))
 
+                dispatch(setLearnDataLoadedAC())
                 dispatch(getLearnCardsTC(cardsPack_id, pageToLoad + 1, loadedPage))
             } else {
-                dispatch(sortLearnCardsAC())
                 dispatch(setAppBusyAC(false))
             }
         })
@@ -118,6 +143,7 @@ export const setGradeTC = (grade: number, cardId: string) => (dispatch: Dispatch
     learnAPI.setGrade(grade, cardId)
         .then(response => {
             dispatch(setNewGradeAC(cardId, response.data.updatedGrade.grade))
+            // dispatch(sortLearnCardsAC())
         })
         .catch(error => {
             dispatch(setAppErrorAC(error.response ? error.response.data.error : error.message))
@@ -131,6 +157,7 @@ export const setGradeTC = (grade: number, cardId: string) => (dispatch: Dispatch
 type ActionType =
     | ReturnType<typeof clearLearnDataAC>
     | ReturnType<typeof addLearnDataAC>
-    | ReturnType<typeof sortLearnCardsAC>
+    | ReturnType<typeof setLearnDataLoadedAC>
+    // | ReturnType<typeof sortLearnCardsAC>
     | ReturnType<typeof getRandomLearnCardAC>
     | ReturnType<typeof setNewGradeAC>
