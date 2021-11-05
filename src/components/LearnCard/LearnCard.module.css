@@ -8,6 +8,7 @@
     width: 90%;
     word-break: break-word;
     border: 1px solid green;
+    border-radius: 10px;
     padding: 10px;
     margin: 5px;
 }

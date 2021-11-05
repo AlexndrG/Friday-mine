@@ -10,7 +10,7 @@ type PropsType = {
 export function LearnCard(props: PropsType) {
     return (
         <div className={s.main}>
-            <div className={s.form + ' ' + (props.closed ? s.closed : '')}>
+            <div className={s.form + (props.closed ? ' ' + s.closed : '')}>
                 <b>{props.nameText}</b>
                 <p/>
                 {props.bodyText}
