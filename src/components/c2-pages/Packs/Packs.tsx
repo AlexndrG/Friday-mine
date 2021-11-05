@@ -124,7 +124,7 @@ export function Packs(props: PropsType) {
                                     >Update</SuperButton>
                                     <SuperButton
                                         onClick={() => props.learnPress(c._id)}
-                                        disabled={props.isBusy}
+                                        disabled={props.isBusy || (c.cardsCount < 1)}
                                     >Learn</SuperButton>
                                 </div>
                             }
