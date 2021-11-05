@@ -51,29 +51,32 @@ export const clearLearnDataAC = () => ({type: 'LEARN/CLEAR-LEARN-DATA'} as const
 export const addLearnDataAC = (cardsData: GetCardsResponseType) => ({type: 'LEARN/ADD-LEARN-DATA', cardsData} as const)
 
 
-export const getLearnCardsTC = (cardsPack_id: string, pageToLoad: number, loadedPage: number) => (dispatch: Dispatch<any>) => {
+export const getLearnCardsTC = (cardsPack_id: string, pageToLoad: number, loadedPage: number) => async (dispatch: Dispatch<any>) => {
     dispatch(setAppErrorAC(''))
     dispatch(setAppBusyAC(true))
 
-    cardsAPI.getCards({...initRequestCardsData, page: pageToLoad, pageCount: 1, cardsPack_id})
-        .then(response => {
-            loadedPage = response.data.page
-            if (pageToLoad === loadedPage) {
-                dispatch(addLearnDataAC(response.data))
+    try {
+        const response = await cardsAPI.getCards({
+            ...initRequestCardsData,
+            page: pageToLoad,
+            pageCount: 1,
+            cardsPack_id
+        })
 
-                dispatch(setAppBusyAC(true))
-                dispatch(getLearnCardsTC(cardsPack_id, pageToLoad + 1, loadedPage))
-            }
-alert()
-            dispatch(setAppBusyAC(false))
-        })
-        .catch(error => {
-            dispatch(setAppErrorAC(error.response ? error.response.data.error : error.message))
-            dispatch(clearLearnDataAC())
-            dispatch(setAppBusyAC(false))
-        })
-        .finally(() => {
-        })
+        loadedPage = response.data.page
+        if (pageToLoad === loadedPage) {
+            dispatch(addLearnDataAC(response.data))
+
+            dispatch(setAppBusyAC(true))
+            dispatch(getLearnCardsTC(cardsPack_id, pageToLoad + 1, loadedPage))
+        }
+        dispatch(setAppBusyAC(false))
+    } catch (error: any) {
+        dispatch(setAppErrorAC(error.response ? error.response.data.error : error.message))
+        dispatch(clearLearnDataAC())
+        dispatch(setAppBusyAC(false))
+    } finally {
+    }
 }
 
 
