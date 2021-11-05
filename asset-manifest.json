@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Friday-mine/static/css/main.db2157b2.chunk.css",
+    "main.css": "/Friday-mine/static/css/main.4cc611c8.chunk.css",
     "main.js": "/Friday-mine/static/js/main.0f137f04.chunk.js",
     "main.js.map": "/Friday-mine/static/js/main.0f137f04.chunk.js.map",
     "runtime-main.js": "/Friday-mine/static/js/runtime-main.5ec9739c.js",
@@ -8,7 +8,7 @@
     "static/js/2.0ae9f743.chunk.js": "/Friday-mine/static/js/2.0ae9f743.chunk.js",
     "static/js/2.0ae9f743.chunk.js.map": "/Friday-mine/static/js/2.0ae9f743.chunk.js.map",
     "index.html": "/Friday-mine/index.html",
-    "static/css/main.db2157b2.chunk.css.map": "/Friday-mine/static/css/main.db2157b2.chunk.css.map",
+    "static/css/main.4cc611c8.chunk.css.map": "/Friday-mine/static/css/main.4cc611c8.chunk.css.map",
     "static/js/2.0ae9f743.chunk.js.LICENSE.txt": "/Friday-mine/static/js/2.0ae9f743.chunk.js.LICENSE.txt",
     "static/media/avatar.f463a804.jpg": "/Friday-mine/static/media/avatar.f463a804.jpg",
     "static/media/loader.b6485230.gif": "/Friday-mine/static/media/loader.b6485230.gif"
@@ -16,7 +16,7 @@
   "entrypoints": [
     "static/js/runtime-main.5ec9739c.js",
     "static/js/2.0ae9f743.chunk.js",
-    "static/css/main.db2157b2.chunk.css",
+    "static/css/main.4cc611c8.chunk.css",
     "static/js/main.0f137f04.chunk.js"
   ]
 }
