@@ -1,12 +1,13 @@
 import {Dispatch} from 'redux';
 import {setAppBusyAC, setAppErrorAC} from './appReducer';
-import {cardsAPI} from '../dal/cards-api';
+import {cardsAPI, GetCardsResponseType} from '../dal/cards-api';
 import {initRequestCardsData} from './cardsReducer';
 
 type CardInfo = {
     cardId: string
     question: string
     answer: string
+    grade: number
 }
 
 const initialState = {
@@ -23,7 +24,21 @@ export function learnReducer(state: StateType = initialState, action: ActionType
                 cards: [],
             }
 
-
+        case 'LEARN/ADD-LEARN-DATA':
+            return {
+                ...state,
+                cards: [
+                    ...state.cards,
+                    ...action.cardsData.cards.map(c =>
+                        ({
+                            cardId: c._id,
+                            question: c.question,
+                            answer: c.answer,
+                            grade: c.grade
+                        })
+                    )
+                ]
+            }
 
 
         default:
@@ -33,26 +48,35 @@ export function learnReducer(state: StateType = initialState, action: ActionType
 
 
 export const clearLearnDataAC = () => ({type: 'LEARN/CLEAR-LEARN-DATA'} as const)
-export const addLearnDataAC = () => ({type: 'LEARN/ADD-LEARN-DATA'} as const)
+export const addLearnDataAC = (cardsData: GetCardsResponseType) => ({type: 'LEARN/ADD-LEARN-DATA', cardsData} as const)
 
 
-export const getLearnCardsTC = (cardsPack_id: string) => (dispatch: Dispatch) => {
+export const getLearnCardsTC = (cardsPack_id: string, pageToLoad: number, loadedPage: number) => (dispatch: Dispatch<any>) => {
     dispatch(setAppErrorAC(''))
     dispatch(setAppBusyAC(true))
 
-    cardsAPI.getCards({...initRequestCardsData, pageCount: 20, cardsPack_id})
+    cardsAPI.getCards({...initRequestCardsData, page: pageToLoad, pageCount: 1, cardsPack_id})
         .then(response => {
-            // dispatch(setCardsDataAC(response.data))
+            loadedPage = response.data.page
+            if (pageToLoad === loadedPage) {
+                dispatch(addLearnDataAC(response.data))
+
+                dispatch(setAppBusyAC(true))
+                dispatch(getLearnCardsTC(cardsPack_id, pageToLoad + 1, loadedPage))
+            }
+alert()
+            dispatch(setAppBusyAC(false))
         })
         .catch(error => {
             dispatch(setAppErrorAC(error.response ? error.response.data.error : error.message))
             dispatch(clearLearnDataAC())
+            dispatch(setAppBusyAC(false))
         })
         .finally(() => {
-            dispatch(setAppBusyAC(false))
         })
 }
 
 
 type ActionType =
     | ReturnType<typeof clearLearnDataAC>
+    | ReturnType<typeof addLearnDataAC>

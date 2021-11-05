@@ -17,7 +17,7 @@ export function LearnContainer() {
 
     useEffect(() => {
         if (isLogined) {
-            dispatch(getLearnCardsTC(cardsPackId))
+            dispatch(getLearnCardsTC(cardsPackId, 1, -1))
         }
 
         return () => {
