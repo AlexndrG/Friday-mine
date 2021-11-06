@@ -137,11 +137,11 @@ export const getPacksTC = () => (dispatch: Dispatch, getState: () => AppRootStat
 }
 
 // export const addPackTC = () => (dispatch: Dispatch) => {
-export const addPackTC = (name:string) => (dispatch: Dispatch<any>) => {
+export const addPackTC = (name: string, privatePack: boolean) => (dispatch: Dispatch<any>) => {
     dispatch(setAppErrorAC(''))
     dispatch(setAppBusyAC(true))
 
-    packsAPI.addPack({name})
+    packsAPI.addPack({name, private: privatePack})
         .then(response => {
             dispatch(getPacksTC())
         })
@@ -166,7 +166,7 @@ export const delPackTC = (id: string) => (dispatch: Dispatch<any>) => {
             dispatch(setAppErrorAC(error.response ? error.response.data.error : error.message))
         })
         .finally(() => {
-           dispatch(setAppBusyAC(false))
+            dispatch(setAppBusyAC(false))
         })
 }
 
