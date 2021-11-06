@@ -15,7 +15,7 @@ export function CardDeleteModal(props: PropsType) {
     const dispatch = useDispatch()
 
     return (
-        <div className={s.modalCenter}>
+        <div className={s.modal}>
             Are you sure to Delete card with Question:<br/>
             "<b>{props.question}</b>" ?
 

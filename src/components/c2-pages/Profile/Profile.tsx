@@ -62,6 +62,7 @@ export function Profile(props: PropsType) {
                     <b>Name:</b>
                     <div>
                         <SuperEditableSpan
+                            inputArea={true}
                             value={props.newName}
                             onChangeText={props.nameChangeText}
                             disabled={props.isBusy}
@@ -74,10 +75,10 @@ export function Profile(props: PropsType) {
                     <b>Avatar link:</b>
                     <div>
                         <SuperEditableSpan
+                            inputArea={false}
                             value={props.newAvatar}
                             onChangeText={props.avatarChangeText}
                             disabled={props.isBusy}
-                            size={75}
                         />
                     </div>
                 </div>

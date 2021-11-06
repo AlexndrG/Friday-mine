@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import s from './CardAddUpdateModal.module.css'
-import SuperInputText from '../../c1-common/c1-SuperInputText/SuperInputText';
 import SuperButton from '../../c1-common/c2-SuperButton/SuperButton';
 import {useDispatch} from 'react-redux';
 
@@ -21,16 +20,24 @@ export function CardAddUpdateModal(props: PropsType) {
     const [answerValue, setAnswerValue] = useState(props.answer)
 
     return (
-        <div>
-            Question: &nbsp;
-            <SuperInputText
+        <div className={s.main}>
+            Question:<br/>
+            <textarea
+                style={{resize: 'none'}}
+                cols={40}
+                rows={5}
+                wrap={'soft'}
                 value={questionValue}
                 onChange={e => setQuestionValue(e.currentTarget.value)}
                 autoFocus
             />
             <p/>
-            Answer: &nbsp;
-            <SuperInputText
+            Answer:<br/>
+            <textarea
+                style={{resize: 'none'}}
+                cols={40}
+                rows={5}
+                wrap={'soft'}
                 value={answerValue}
                 onChange={e => setAnswerValue(e.currentTarget.value)}
             />
