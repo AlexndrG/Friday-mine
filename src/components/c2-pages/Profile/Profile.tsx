@@ -66,7 +66,7 @@ export function Profile(props: PropsType) {
                             value={props.newName}
                             onChangeText={props.nameChangeText}
                             disabled={props.isBusy}
-                            size={50}
+                            // size={50}
                         />
                     </div>
                 </div>

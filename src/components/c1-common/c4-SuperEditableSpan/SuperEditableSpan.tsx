@@ -78,6 +78,7 @@ const SuperEditableSpan: React.FC<SuperEditableSpanType> = (
                 ? (
                     inputArea
                         ? <SuperInputText
+                            className={s.superInputText}
                             autoFocus // пропсу с булевым значением не обязательно указывать true
                             onBlur={onBlurInputCallback}
                             onEnter={onEnterInputCallback}
@@ -85,7 +86,7 @@ const SuperEditableSpan: React.FC<SuperEditableSpanType> = (
                             {...restProps} // отдаём инпуту остальные пропсы если они есть (value например там внутри)
                         />
                         : <textarea
-                            style={{resize: 'none'}}
+                            className={s.textArea}
                             cols={75}
                             rows={10}
                             autoFocus // пропсу с булевым значением не обязательно указывать true
